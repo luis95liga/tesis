@@ -1,0 +1,133 @@
+<mat-toolbar class="text-white bg-primary">
+  <span>Documentos</span>
+  <span class="fill-remaining-space"></span>
+  <button mat-icon-button [mat-dialog-close]="true" aria-label="Example icon button with a vertical three dot icon">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-dialog-content>
+  <div class="d-flex">
+    <div class="p-2 flex-grow-1">
+      <div *ngIf="new">
+        <form  [formGroup]="documentform" class="row">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label class="col-form-label col-form-label-sm">Fecha de Expedición</label>
+              <input type="date" class="form-control form-control-sm" [ngClass]="{'is-invalid': isvalid('issue_date'), 'is-valid': documentform.get('issue_date').valid }" formControlName="issue_date">
+              <small class="invalid-feedback" *ngIf="isvalid('issue_date') || false">
+                {{ errorMessage('issue_date') }}
+              </small>
+            </div>
+            <div class="form-group">
+              <label class="col-form-label col-form-label-sm">Costo</label>
+              <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">$</span>
+                <input type="number" class="form-control form-control-sm" [ngClass]="{'is-invalid': isvalid('cost_procedure'), 'is-valid': documentform.get('cost_procedure').valid }" formControlName="cost_procedure" placeholder="">
+                <small class="invalid-feedback" *ngIf="isvalid('cost_procedure') || false">
+                  {{ errorMessage('cost_procedure') }}
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label class="col-form-label col-form-label-sm">Fecha de Expiración</label>
+              <input type="date" class="form-control form-control-sm" [ngClass]="{'is-invalid': isvalid('expiration_date'), 'is-valid': documentform.get('expiration_date').valid }" formControlName="expiration_date" placeholder="">
+              <small class="invalid-feedback"*ngIf="isvalid('expiration_date') || false">
+                {{ errorMessage('expiration_date') }}
+              </small>
+            </div>
+            <div class="form-group">
+              <label class="col-form-label col-form-label-sm">Tipo de Documento</label>
+              <select class="form-select form-select-sm" formControlName="idtype_document" [ngClass]="{'is-invalid': isvalid('idtype_document'), 'is-valid': documentform.get('idtype_document').valid }" required>
+                <option value="">seleccione uno</option>
+                <option *ngFor="let item of documentstype" [value]="item.iddocument_type" >{{ item.name }}</option>
+              </select>
+              <small class="invalid-feedback" *ngIf="isvalid('idtype_document') || false">
+                {{ errorMessage('idtype_document') }}
+              </small>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label class="col-form-label col-form-label-sm">Archivo</label>
+              <input type="file" (change)="onChange($event)" accept="application/pdf" class="form-control form-control-sm">
+              <small class="invalid-feedback"*ngIf="errms || false">
+                {{ message }}
+              </small>
+            </div>
+            <div class="form-group">
+              <label class="col-form-label col-form-label-sm">Observación</label>
+              <textarea type="date" class="form-control form-control-sm" rows="2" formControlName="observations" [ngClass]="{'is-invalid': isvalid('observations'), 'is-valid': documentform.get('observations').valid }" placeholder=""></textarea>
+              <small class="invalid-feedback"*ngIf="isvalid('observations') || false">
+                {{ errorMessage('observations') }}
+              </small>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="p-2">
+      <button type="button" (click)="New(new)" class="btn btn-outline-success btn-sm">
+        <i class="fa-solid" [ngClass]="{'fa-plus': !new, 'fa-check': new }"></i>
+      </button>
+      <samp style="margin: 5px;" *ngIf="new"></samp>
+      <button type="button" *ngIf="new" (click)="cancel(new)" class="btn btn-outline-danger btn-sm">
+        <i class="fa-solid fa-x"></i>
+      </button>
+    </div>
+  </div>
+  <!--[ 'iddocument','attachment','issue_date','expiration_date','cost_procedure','type_document','actions'];-->
+  <table mat-table [dataSource]="dataSource" class="table table-striped table-hover text-center">
+    <ng-container matColumnDef="iddocument">
+      <th scope="col" *matHeaderCellDef>Id</th>
+      <td scope="row" *matCellDef="let element">{{ element.iddocument }}</td>
+    </ng-container>
+    <ng-container matColumnDef="type_document">
+      <th scope="col" *matHeaderCellDef>Documento<th>
+      <td scope="row" *matCellDef="let element">{{ element.type_document }}</td>
+    </ng-container>
+    <ng-container matColumnDef="attachment">
+      <th scope="col" *matHeaderCellDef>Url<th>
+      <td scope="row" *matCellDef="let element">
+        <ng-container *ngIf="element.attachment.length > 0 ; else elseTemplate">
+          <button (click)="onOpenModal(element.attachment)" class="spacer btn btn-outline-info">
+            <i class="fa-solid fa-file-pdf"></i>
+          </button>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <button disabled class="spacer btn btn-outline-dark">
+            <i class="fa-solid fa-file-pdf"></i>
+          </button>
+        </ng-template>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="issue_date">
+      <th scope="col" *matHeaderCellDef>Fecha de Expedición<th>
+      <td scope="row" *matCellDef="let element">{{ element.issue_date }}</td>
+    </ng-container>
+    <ng-container matColumnDef="expiration_date">
+      <th scope="col" *matHeaderCellDef>Fecha de Expiración<th>
+      <td scope="row" *matCellDef="let element">{{ element.expiration_date }}</td>
+    </ng-container>
+    <ng-container matColumnDef="cost_procedure">
+      <th scope="col" *matHeaderCellDef>Costo<th>
+      <td scope="row" *matCellDef="let element">{{ element.cost_procedure }}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th scope="col" *matHeaderCellDef>Actiones</th>
+      <td scope="row" *matCellDef="let element">
+        <div class="">
+          <button (click)="Edit(element.iddocument)" class="spacer btn btn-outline-warning">
+            <i class="fa-solid fa-file-pen"></i>
+          </button>
+          <button (click)="delete(element.iddocument)" class="spacer btn btn-outline-danger">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</mat-dialog-content>

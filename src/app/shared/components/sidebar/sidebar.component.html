@@ -1,0 +1,53 @@
+<mat-list>
+  <mat-nav-list>
+    <a class="text-list" mat-list-item [routerLink]="['/displaypanel']" detail="false" routerDirection="root" routerLinkActive="selected">
+      <div matListItemIcon><i class="fa-solid fa-grip"></i></div>
+      <div matListItemTitle>Inicio</div>
+    </a>
+  </mat-nav-list>
+
+  <mat-divider></mat-divider>
+
+  <mat-nav-list>
+    <a class="text-list" mat-list-item [routerLink]="['/displaypanel/business']" detail="false" routerDirection="root" routerLinkActive="selected">
+      <div matListItemIcon><i class="fa-solid fa-building"></i></div>
+      <span matListItemTitle>Empresa</span>
+    </a>
+  </mat-nav-list>
+
+  <mat-nav-list>
+    <a class="text-list" mat-list-item [routerLink]="['/displaypanel/vehicle']" detail="false" routerDirection="root" routerLinkActive="selected">
+      <div matListItemIcon><i class="fa-solid fa-truck"></i></div>
+      <span matListItemTitle>Vehículos</span>
+    </a>
+  </mat-nav-list>
+  <mat-nav-list>
+    <a class="text-list" mat-list-item [routerLink]="['/displaypanel/route']" detail="false" routerDirection="root" routerLinkActive="selected">
+      <div matListItemIcon><i class="fa-solid fa-route"></i></div>
+      <span matListItemTitle>Viajes</span>
+    </a>
+  </mat-nav-list>
+  <mat-nav-list>
+    <a class="text-list" mat-list-item [routerLink]="['/displaypanel/client']" detail="false" routerDirection="root" routerLinkActive="selected">
+      <div matListItemIcon><i class="fa-solid fa-user"></i></div>
+      <span matListItemTitle>clientes</span>
+    </a>
+  </mat-nav-list>
+  <mat-nav-list></mat-nav-list>
+
+
+
+
+  <a class="text-list" mat-list-item [routerLink]="['/displaypanel/vehicles']" detail="false" routerDirection="root" routerLinkActive="selected">
+    <div matListItemIcon><i class="fa-solid fa-map-location"></i></div>
+    <span matListItemTitle>Viajes</span>
+  </a>
+  <a class="text-list" mat-list-item [routerLink]="['/displaypanel/vehicles']" detail="false" routerDirection="root" routerLinkActive="selected">
+    <div matListItemIcon><i class="fa-solid fa-file"></i></div>
+    <span matListItemTitle>Reportes</span>
+  </a>
+  <a class="text-list" mat-list-item [routerLink]="['/displaypanel/vehicles']" detail="false" routerDirection="root" routerLinkActive="selected">
+    <div matListItemIcon><i class="fa-solid fa-chart-bar"></i></div>
+    <span matListItemTitle>Gráficos</span>
+  </a>
+</mat-list>

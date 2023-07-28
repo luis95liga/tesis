@@ -1,0 +1,40 @@
+.notfound {
+  height: 88.5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.message {
+  background: rgb(46, 204, 113);
+  width: 80%;
+  height: 80%;
+  justify-content: center;
+  align-items: center;
+  display: block;
+}
+
+.text{
+  font-weight: bold;
+  font-size: 100px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+  color: white;
+}
+
+.text1{
+  font-weight: bold;
+  font-size: xx-large;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+  color: white;
+}
+
+.text2{
+  font-weight: lighter;
+  font-style: italic;
+  font-size: large;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  color: white;
+}

@@ -1,0 +1,185 @@
+<div class="container-fluid">
+  <div class="mt-4"></div>
+  <nav aria-label="breadcrume">
+    <ol class="breadcrumb" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+      <li class="breadcrumb-item">
+        <div class="text-info-emphasis">
+          <i class="fa-solid fa-house"></i>
+        </div>
+      </li>
+    </ol>
+  </nav>
+  <div class="form-group d-flex justify-content-between">
+    <h4 class="fw-bold">{{ name }}</h4>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <button class="card border-primary cr" [routerLink]="['business/']">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <img src="./../../../assets/img/icons8-cliente-de-empresa-100.png">
+                  </div>
+                  <div class="col-sm-8">
+                    <div class="textv">
+                      <div class="textl">
+                        <h5 class="card-title title fw-bold">Empresa</h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </button>
+            </div>
+            <div class="col">
+              <button class="card border-primary cr" [routerLink]="['vehicle/']">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <img src="./../../../assets/img/icons8-camión2-100.png">
+                  </div>
+                  <div class="col-sm-8">
+                    <div class="textv">
+                      <div class="textl">
+                        <h5 class="card-title title fw-bold">Vehículos</h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </button>
+            </div>
+            <div class="col">
+              <button class="card border-primary cr" [routerLink]="['client/']">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <img src="./../../../assets/img/icons8-grupos-de-usuarios-100.png">
+                  </div>
+                  <div class="col-sm-8">
+                    <div class="textv">
+                      <div class="textl">
+                        <h5 class="card-title title fw-bold">Clientes</h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </button>
+            </div>
+            <div class="col">
+              <button class="card border-primary cr" [routerLink]="['route/']">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <img src="./../../../assets/img/icons8-anchor-nodes-100.png">
+                  </div>
+                  <div class="col-sm-8">
+                    <div class="textv">
+                      <div class="textl">
+                        <h5 class="card-title title fw-bold">Viajes</h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </button>
+            </div>
+            <div class="col">
+              <button class="card border-primary cr" [routerLink]="['/displaypanel']">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <img src="./../../../assets/img/icons8-hojas-100.png">
+                  </div>
+                  <div class="col-sm-8">
+                    <div class="textv">
+                      <div class="textl">
+                        <h5 class="card-title title fw-bold">Resultados</h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--<div class="col-sm-3">
+      <div class="card">
+        <div class="card-body">
+          <cdk-virtual-scroll-viewport itemSize="50" style="height: 75px;" class="bg-primary">
+            <ol class="" *ngFor="let item1 of items">
+              <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                  <span>{{ item1.nombre }}</span>
+                </div>
+                <span class="badge bg-dark rounded-pill">{{ item1.fecha }}</span>
+              </li>
+            </ol>
+          </cdk-virtual-scroll-viewport>
+        </div>
+      </div>
+    </div>-->
+  </div>
+  <div class="mt-1"></div>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title fw-bold">Viajes</h5>
+      <table mat-table [dataSource]="dataSource" class="table table-striped table-hover">
+        <ng-container matColumnDef="position">
+          <th class="table-dark" scope="col" *matHeaderCellDef> No. </th>
+          <td scope="row" *matCellDef="let element"> {{element.position}} </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th scope="col" class="table-dark" *matHeaderCellDef> Name </th>
+          <td scope="row" *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="weight">
+          <th scope="col" class="table-dark" *matHeaderCellDef> Weight </th>
+          <td scope="row" *matCellDef="let element"> {{element.weight}} </td>
+        </ng-container>
+        <ng-container matColumnDef="symbol">
+          <th scope="col" class="table-dark" *matHeaderCellDef> Symbol </th>
+          <td scope="row" *matCellDef="let element"> {{element.symbol}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator #scheduledOrdersPaginator
+        [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons
+        aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+  </div>
+  <div class="mt-1"></div>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title fw-bold">Vehículos</h5>
+      <table mat-table [dataSource]="dataSource" class="table table-striped table-hover">
+        <ng-container matColumnDef="position">
+          <th class="table-dark" scope="col" *matHeaderCellDef> No. </th>
+          <td scope="row" *matCellDef="let element"> {{element.position}} </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th scope="col" class="table-dark" *matHeaderCellDef> Name </th>
+          <td scope="row" *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="weight">
+          <th scope="col" class="table-dark" *matHeaderCellDef> Weight </th>
+          <td scope="row" *matCellDef="let element"> {{element.weight}} </td>
+        </ng-container>
+        <ng-container matColumnDef="symbol">
+          <th scope="col" class="table-dark" *matHeaderCellDef> Symbol </th>
+          <td scope="row" *matCellDef="let element"> {{element.symbol}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator #scheduledOrdersPaginator
+        [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons
+        aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+  </div>
+</div>

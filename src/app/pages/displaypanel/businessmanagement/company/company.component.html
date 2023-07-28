@@ -1,0 +1,214 @@
+<div class="container-fluid mb-3">
+  <div class="mt-4"></div>
+  <ol class="breadcrumb" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+    <li class="breadcrumb-item">
+      <a class="text-info-emphasis" [routerLink]="['/displaypanel']">
+        <i class="fa-solid fa-house"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item"><a [routerLink]="['/displaypanel/business']">Empresa</a></li>
+    <li class="breadcrumb-item active">Ficha</li>
+  </ol>
+  <div class="form-group d-flex justify-content-between">
+    <h4 class="fw-bold">Empresa</h4>
+    <div>
+      <button class="btn btn-warning btn-sm mg" (click)="edit(isedit)" type="button" [disabled]=isedit><i class="fa-solid fa-pen-to-square"></i></button>
+      <button class="btn btn-success btn-sm mg" *ngIf="isedit" [disabled]="!companyform.valid" (click)="save()" type="button"><i class="fa-solid fa-floppy-disk"></i></button>
+      <button class="btn btn-secondary btn-sm mg" *ngIf="!isedit" type="button" (click)="createPDF()"><i class="fa-solid fa-print"></i></button>
+      <button class="btn btn-danger btn-sm mg" (click)="edit(isedit)" type="button" [disabled]=!isedit><i class="fa-solid fa-xmark"></i></button>
+    </div>
+  </div>
+    <div class="card border-success mb-3">
+        <div class="card-body">
+            <form [formGroup]="companyform">
+              <div class="row">
+                <div class="col-2 text-center">
+                  <img [src]="img" width="120px" height="120px" srcset="">
+                </div>
+                <div class="col-10">
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label fw-bold">RUC/CI:</label>
+                    <div class="col-sm-10">
+                      <input
+                      type="text"
+                      maxlength="13"
+                      class="form-control form-control-sm"
+                      [ngClass]="{'is-invalid': isvalid('ruc') }"
+                      formControlName="ruc"
+                      placeholder="1000000000001">
+                      <small class="form-text text-danger" *ngIf="isvalid('ruc') || false">
+                        {{ errorMessage('ruc') }}
+                      </small>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label fw-bold">Nombre:</label>
+                    <div class="col-sm-10">
+                      <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      [ngClass]="{'is-invalid': isvalid('name') }"
+                      formControlName="name" placeholder="Nombre Empresa">
+                      <small class="form-text text-danger" *ngIf="isvalid('name') || false">
+                        {{ errorMessage('name') }}
+                      </small>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group row">
+                        <label class="col-sm-2 col-form-label fw-bold">Tipo:</label>
+                        <div class="col-sm-10">
+                          <select
+                          required
+                          class="form-select form-select-sm"
+                          [ngClass]="{'is-invalid': isvalid('idtype_company') }"
+                          formControlName="idtype_company">
+                            <option value="">seleccione uno</option>
+                            <option *ngFor="let item of typecompany" [value]="item.idtype_company" >{{ item.name }}</option>
+                          </select>
+                          <small class="form-text text-danger" *ngIf="isvalid('idtype_company') || false">
+                            {{ errorMessage('idtype_company') }}
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group row">
+                        <label class="col-sm-2 col-form-label fw-bold">Logo:</label>
+                        <div class="col-sm-10">
+                          <input type="file" name="profile" [disabled]="!isedit" (change)="onChange($event)" class="form-control form-control-sm"  required>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label fw-bold">Localidad:</label>
+                    <div class="col-sm-10">
+                      <select
+                      required
+                      class="form-select form-select-sm"
+                      [ngClass]="{'is-invalid': isvalid('idlocation') }"
+                      formControlName="idlocation">
+                        <option value="">seleccione uno</option>
+                        <option *ngFor="let item of location" [value]="item.idlocation" >{{ item.location }} ( {{ item.province }} )</option>
+                      </select>
+                      <small class="form-text text-danger" *ngIf="isvalid('idlocation') || false">
+                        {{ errorMessage('idlocation') }}
+                      </small>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label fw-bold">Dirección:</label>
+                    <div class="col-sm-10">
+                      <textarea
+                      class="form-control form-control-sm"
+                      formControlName="address"
+                      [ngClass]="{'is-invalid': isvalid('address') }"
+                      placeholder="Nombre Empresa"></textarea>
+                      <small class="form-text text-danger" *ngIf="isvalid('address') || false">
+                        {{ errorMessage('address') }}
+                      </small>
+                    </div>
+                  </div>
+                  <div class="mt-1"></div>
+                  <div class="form-group row">
+                    <label class="col-sm-4 col-form-label fw-bold">Correo Electrónico:</label>
+                    <div class="col-sm-8">
+                      <input
+                      type="email"
+                      class="form-control form-control-sm"
+                      [ngClass]="{'is-invalid': isvalid('email') }"
+                      formControlName="email"
+                      placeholder="example@exaple.com"
+                      required>
+                      <small class="form-text text-danger" *ngIf="isvalid('email') || false">
+                        {{ errorMessage('email') }}</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group row">
+                        <label class="col-sm-7 col-form-label fw-bold">Teléfono Principal:</label>
+                        <div class="col-sm-5">
+                          <input
+                          type="tel"
+                          class="form-control form-control-sm"
+                          [ngClass]="{'is-invalid': isvalid('cell') }"
+                          formControlName="cell"
+                          placeholder="022366578"
+                          required>
+                          <small class="form-text text-danger" *ngIf="isvalid('cell') || false">
+                            {{ errorMessage('cell') }}
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group row">
+                        <label class="col-sm-4 col-form-label fw-bold">Teléfono:</label>
+                        <div class="col-sm-8">
+                          <input
+                          type="tel"
+                          class="form-control form-control-sm"
+                          [ngClass]="{'is-invalid': isvalid('tel_atcn_client') }"
+                          formControlName="tel_atcn_client"
+                          placeholder="0945726581"
+                          required>
+                          <small class="form-text text-danger" *ngIf="isvalid('tel_atcn_client') || false">
+                            {{ errorMessage('tel_atcn_client') }}
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label fw-bold">Teléfono Móvil</label>
+                    <div class="col-sm-9">
+                      <input
+                      type="tel"
+                      class="form-control form-control-sm"
+                      formControlName="phone"
+                      [ngClass]="{'is-invalid': isvalid('phone') }"
+                      placeholder="0978542568"
+                      required>
+                      <small class="form-text text-danger" *ngIf="isvalid('phone') || false">
+                        {{ errorMessage('phone') }}
+                      </small>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="form-group row">
+                        <label class="col-sm-4 col-form-label fw-bold">Carga Predeterminada:</label>
+                        <div class="col-sm-8">
+                          <input
+                          type="number"
+                          class="form-control form-control-sm"
+                          [ngClass]="{'is-invalid': isvalid('default_load_type') }"
+                          formControlName="default_load_type"
+                          placeholder="10"
+                          required>
+                          <small class="form-text text-danger" *ngIf="isvalid('default_load_type') || false">
+                            {{ errorMessage('default_load_type') }}
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="d-flex flex-row-reverse">
+              <div class="p-2"><button type="button" class="btn btn-link" (click)="onOpenModal2()">Documentos</button></div>
+              <div class="p-2"><button type="button" class="btn btn-link" (click)="onOpenModal()">Cuentas Bancarias</button></div>
+            </div>
+        </div>
+    </div>
+</div>

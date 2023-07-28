@@ -1,0 +1,35 @@
+<mat-toolbar class="navbar navbar-expand-lg navbar-dark bg-dark text-white">
+  <ng-container *ngIf="!isLogged; else viewUsers" >
+    <span class="navbar-brand">
+      <img src="./../../../../assets/img/Ua7.png" class="img">
+    </span>
+    <span class="spacer"></span>
+  </ng-container>
+</mat-toolbar>
+
+<ng-template #viewUsers>
+  <button mat-icon-button (click)="onTogglesSidenav()" class="navbar-brand">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="spacer"></span>
+  <label>BIENVENIDO, {{ name }}</label>
+  <span style="margin: 5px;"></span>
+  <a [matMenuTriggerFor]="beforeMenu" class="boton">
+    <i class="fa-regular fa-user"></i>
+  </a>
+  <mat-menu #beforeMenu="matMenu" xPosition="before" class="bg-light">
+    <button mat-menu-item (click)="onModalEmployee()" >
+      <i class="fa-solid fa-address-card"></i>
+      <span class="lb text-dark">Mi Perfil</span>
+    </button>
+    <button mat-menu-item *ngIf="isAdmin" [routerLink]="['/admin']">
+      <i class="fa-solid fa-gear text-dark" ></i>
+      <span class="lb text-dark">Configuración</span>
+    </button>
+    <button mat-menu-item (click)="onLogout()">
+      <i class="fa-solid fa-arrow-right-from-bracket text-dark"></i>
+      <span class="lb text-dark">Salir</span>
+    </button>
+  </mat-menu>
+</ng-template>
+

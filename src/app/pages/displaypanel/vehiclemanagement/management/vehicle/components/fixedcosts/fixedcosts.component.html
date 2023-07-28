@@ -1,0 +1,108 @@
+<mat-toolbar class="text-white bg-primary">
+  <span>Costos Fijos</span>
+  <span class="fill-remaining-space"></span>
+  <button mat-icon-button [mat-dialog-close]="true" aria-label="Example icon button with a vertical three dot icon">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-dialog-content style="max-height: unset !important;">
+  <form [formGroup]="fixedcostsform">
+    <table class="table table-sm">
+      <thead>
+        <tr class="table-dark">
+          <th scope="col">NOMBRE</th>
+          <th scope="col">COSTO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Matriculación vehicular (impuesto ambiental, cabezal, plataforma, otros) - Anual</th>
+          <td>
+            <input formControlName="vehicleRegistration"
+              class="form-control form-control-sm text-end"
+              min="0" step="0.10"
+              type="number"
+              placeholder="100,00"
+              [ngClass]="{'is-invalid': isvalid('vehicleRegistration'), 'is-valid': fixedcostsform.get('vehicleRegistration').valid }">
+            <small class="form-text text-danger" *ngIf="isvalid('vehicleRegistration') || false">
+              {{ messageerror('vehicleRegistration') }}
+            </small>
+          </td>
+        </tr>
+        <tr>
+          <th>Seguros; vehículos, carga - Mensual </th>
+          <td>
+            <input formControlName="insurance"
+              class="form-control form-control-sm text-end"
+              min="0" step="0.10"
+              type="number"
+              placeholder="100,00"
+              [ngClass]="{'is-invalid': isvalid('insurance'), 'is-valid': fixedcostsform.get('insurance').valid }">
+            <small class="form-text text-danger" *ngIf="isvalid('insurance') || false">
+              {{ messageerror('insurance') }}
+            </small>
+          </td>
+        </tr>
+        <tr>
+          <th>Revisiones técnicas</th>
+          <td>
+            <input formControlName="technicalReviews"
+              class="form-control form-control-sm text-end"
+              min="0" step="0.10"
+              type="number"
+              placeholder="100,00"
+              [ngClass]="{'is-invalid': isvalid('technicalReviews'), 'is-valid': fixedcostsform.get('technicalReviews').valid }">
+            <small class="form-text text-danger" *ngIf="isvalid('technicalReviews') || false">
+              {{ messageerror('technicalReviews') }}
+            </small>
+          </td>
+        </tr>
+        <tr>
+          <th>Costos financieros (cuota interés letra vehículo) - Mensual</th>
+          <td>
+            <input formControlName="financialCosts"
+              class="form-control form-control-sm text-end"
+              min="0" step="0.10"
+              type="number"
+              placeholder="100,00"
+              [ngClass]="{'is-invalid': isvalid('financialCosts'), 'is-valid': fixedcostsform.get('financialCosts').valid }">
+            <small class="form-text text-danger" *ngIf="isvalid('financialCosts') || false">
+              {{ messageerror('financialCosts') }}
+            </small>
+          </td>
+        </tr>
+        <tr>
+          <th>Rastreo satelital GPS - Mensual</th>
+          <td>
+            <input formControlName="satelliteTracking"
+              class="form-control form-control-sm text-end"
+              min="0" step="0.10"
+              type="number"
+              placeholder="100,00"
+              [ngClass]="{'is-invalid': isvalid('satelliteTracking'), 'is-valid': fixedcostsform.get('satelliteTracking').valid }">
+            <small class="form-text text-danger" *ngIf="isvalid('satelliteTracking') || false">
+              {{ messageerror('satelliteTracking') }}
+            </small>
+          </td>
+        </tr>
+        <tr>
+          <th>Póliza andina - Mensual</th>
+          <td>
+            <input formControlName="andeanPolicy"
+              class="form-control form-control-sm text-end"
+              min="0" step="0.10"
+              type="number"
+              placeholder="100,00"
+              [ngClass]="{'is-invalid': isvalid('andeanPolicy'), 'is-valid': fixedcostsform.get('andeanPolicy').valid }">
+            <small class="form-text text-danger" *ngIf="isvalid('andeanPolicy') || false">
+              {{ messageerror('andeanPolicy') }}
+            </small>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="btn btn-success" (click)="save()" [disabled]="!fixedcostsform.valid">Guardar</button>
+</mat-dialog-actions>

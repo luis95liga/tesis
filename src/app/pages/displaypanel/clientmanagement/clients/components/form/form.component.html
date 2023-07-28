@@ -1,0 +1,147 @@
+<mat-toolbar class="text-white bg-primary">
+  <span>{{ text }} Cliente</span>
+  <span class="fill-remaining-space"></span>
+  <button mat-icon-button [mat-dialog-close]="true" >
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+</mat-toolbar>
+<mat-dialog-content class="mat-typography">
+  <form  [formGroup]="clientform">
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="row">
+          <div class="col-sm-4 text-center">
+            <img src="./../../../../../../assets/noimage.png" width="80px" height="80px" srcset="">
+            <div class="d-grid gap-2">
+              <input type="file" name="photo" class="btn btn-dark btn-sm" required>
+            </div>
+          </div>
+          <div class="col-sm-8">
+            <div class="form-group row">
+              <label for="staticEmail" class="col-sm-3 col-form-label fw-bold">Cedula:</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control form-select-sm" maxlength="10" [ngClass]="{'is-invalid': isvalid('identificationcard'), 'is-valid': clientform.get('identificationcard').valid }" placeholder="1000000000" formControlName="identificationcard" required>
+                <small class="form-text text-danger" *ngIf="isvalid('identificationcard') || false">
+                  {{ errorMessage('identificationcard') }}
+                </small>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="staticEmail" class="col-sm-3 col-form-label fw-bold">Nombres:</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control form-select-sm" [ngClass]="{'is-invalid': isvalid('names'), 'is-valid': clientform.get('names').valid }" placeholder="Nombres" formControlName="names" required>
+                <small class="form-text text-danger" *ngIf="isvalid('names') || false">
+                  {{ errorMessage('names') }}
+                </small>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="staticEmail" class="col-sm-3 col-form-label fw-bold">Apellidos:</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control form-select-sm" [ngClass]="{'is-invalid': isvalid('lastnames'), 'is-valid': clientform.get('lastnames').valid }" formControlName="lastnames" required placeholder="Apellidos">
+                <small class="form-text text-danger" *ngIf="isvalid('lastnames') || false">
+                  {{ errorMessage('lastnames') }}
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="card border-primary">
+          <div class="card-body">
+            <div class="form-group">
+              <label class="form-label fw-bold">Fecha de Ingreso</label>
+              <input type="date" class="form-control form-select-sm" formControlName="entry_date" [ngClass]="{'is-invalid': isvalid('entry_date'), 'is-valid': clientform.get('entry_date').valid }" required placeholder="01/02/2020">
+              <small class="form-text text-danger" *ngIf="isvalid('entry_date') || false">
+                {{ errorMessage('entry_date') }}
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-1"></div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label class="col-sm-5 col-form-label fw-bold">Fecha de Nacimiento:</label>
+          <div class="col-sm-7">
+            <input type="date" (change)="onAgeCalculator($event)" class="form-control form-select-sm" formControlName="birth_date" [ngClass]="{'is-invalid': isvalid('birth_date'), 'is-valid': clientform.get('birth_date').valid }" required placeholder="01/01/2022">
+            <small class="form-text text-danger" *ngIf="isvalid('birth_date') || false">
+              {{ errorMessage('birth_date') }}
+            </small>
+            <small class="form-text text-danger" *ngIf="date">
+              {{ message }}
+            </small>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label fw-bold">Localización:</label>
+          <div class="col-sm-9">
+            <select required class="form-select form-select-sm" [ngClass]="{'is-invalid': isvalid('iddestinations'), 'is-valid': clientform.get('iddestinations').valid }" formControlName="iddestinations" placeholder="Localización">
+              <option value="">seleccione uno</option>
+              <option *ngFor="let item of destinations" [value]="item.iddestinations" >{{ item.destinations }} ( {{item.province}} )</option>
+            </select>
+            <small class="form-text text-danger" *ngIf="isvalid('iddestinations') || false">
+              {{ errorMessage('iddestinations') }}
+            </small>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label fw-bold">Dirección:</label>
+          <div class="col-sm-10">
+            <textarea class="form-control form-select-sm" formControlName="address" [ngClass]="{'is-invalid': isvalid('address'), 'is-valid': clientform.get('address').valid }" required rows="2" placeholder="dirección"></textarea>
+            <small class="form-text text-danger" *ngIf="isvalid('address') || false">
+              {{ errorMessage('address') }}
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group row mt-1">
+          <label class="col-sm-5 col-form-label fw-bold">Correo Electrónico:</label>
+          <div class="col-sm-7">
+            <input type="email" class="form-control form-select-sm" formControlName="email" [ngClass]="{'is-invalid': isvalid('email'), 'is-valid': clientform.get('email').valid }" required placeholder="example@example.com">
+            <small class="form-text text-danger" *ngIf="isvalid('email') || false">
+              {{ errorMessage('email') }}
+            </small>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-5 col-form-label fw-bold">Teléfono del Trabajo:</label>
+          <div class="col-sm-7">
+            <input type="tel" class="form-control form-select-sm" formControlName="phone" [ngClass]="{'is-invalid': isvalid('phone'), 'is-valid': clientform.get('phone').valid }" required placeholder="022531837">
+            <small class="form-text text-danger" *ngIf="isvalid('phone') || false">
+              {{ errorMessage('phone') }}
+            </small>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="staticEmail" class="col-sm-5 col-form-label fw-bold">Teléfono Movil:</label>
+          <div class="col-sm-7">
+            <input type="tel" class="form-control form-select-sm" [ngClass]="{'is-invalid': isvalid('cell'), 'is-valid': clientform.get('cell').valid }" formControlName="cell" required placeholder="0912345678">
+            <small class="form-text text-danger" *ngIf="isvalid('cell') || false">
+              {{ errorMessage('cell') }}
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-1"></div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label fw-bold">Observaciones:</label>
+      <div class="col-sm-10">
+        <textarea class="form-control form-select-sm" formControlName="observations" [ngClass]="{'is-invalid': isvalid('observations'), 'is-valid': clientform.get('observations').valid }" required rows="2" placeholder="Observaciones"></textarea>
+        <small class="form-text text-danger" *ngIf="isvalid('observations') || false">
+          {{ errorMessage('observations') }}
+        </small>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="btn btn-success" [disabled]="!clientform.valid" (click)="save()">Guardar</button>
+</mat-dialog-actions>
+

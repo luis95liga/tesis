@@ -1,0 +1,31 @@
+<mat-toolbar class="text-white bg-primary">
+  <span>Selecionar Ubicación</span>
+  <span class="fill-remaining-space"></span>
+  <button mat-icon-button [mat-dialog-close]="true" >
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+</mat-toolbar>
+<mat-dialog-content class="mat-typography">
+  <div class="form-group">
+    <div class="form-floating mb-3">
+      <input ngx-google-places-autocomplete type="text" class="form-control" placeholder="address" [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)">
+      <label for="floatingInput">Buscar</label>
+    </div>
+  </div>
+  <agm-map
+    [latitude]='coordenadas.latitude'
+    [longitude]='coordenadas.longitude'
+    [zoom]='zoom'>
+      <agm-marker
+        [latitude]='coordenadas.latitude'
+        [longitude]='coordenadas.longitude'
+        [markerDraggable]="true"
+        (dragEnd)="markerDragEnd($event)">
+      </agm-marker>
+  </agm-map>
+  <div class="mt-2"></div>
+  <h5>Localicación: {{ coordenadas.address }} ( {{ coordenadas.latitude }} : {{ coordenadas.longitude }} )</h5>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="btn btn-success" (click)="save()">Selecionar</button>
+</mat-dialog-actions>

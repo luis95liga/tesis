@@ -1,0 +1,82 @@
+<mat-toolbar class="text-white bg-primary">
+  <span>Ruta</span>
+  <span class="fill-remaining-space"></span>
+  <button mat-icon-button mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-dialog-content class="">
+  <form [formGroup]="tatulationform">
+    <div class="form-group row">
+      <label class="col-sm-5 col-form-label fw-bold">Localidad de Origen:</label>
+      <div class="col-sm-7">
+        <select
+          class="form-select form-select-sm"
+          [ngClass]="{'is-invalid': isvalid('idlocation'), 'is-valid': tatulationform.get('idlocation').valid }"
+          placeholder="1"
+          formControlName="idlocation"
+          required>
+          <option value="">Seleccione</option>
+          <option *ngFor="let item of location" [value]="item.idlocation">{{ item.location }}</option>
+        </select>
+        <small class="form-text text-danger" *ngIf="isvalid('idlocation') || false">
+          {{errorMessage('idlocation') }}
+        </small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-5 col-form-label fw-bold">Localidad de Destino:</label>
+      <div class="col-sm-7">
+        <select
+          class="form-select form-select-sm"
+          [ngClass]="{'is-invalid': isvalid('iddestinations'), 'is-valid': tatulationform.get('iddestinations').valid }"
+          formControlName="iddestinations"
+          required>
+          <option value="">Seleccione</option>
+          <option *ngFor="let item of destinations" [value]="item.iddestinations">{{ item.destinations }}</option>
+        </select>
+        <small class="form-text text-danger" *ngIf="isvalid('iddestinations') || false">
+          {{errorMessage('iddestinations') }}
+        </small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-5 col-form-label fw-bold">Kms de Distancia:</label>
+      <div class="col-sm-4">
+        <div class="input-group input-group-sm">
+          <input
+          type="number"
+          readonly=""
+          class="form-control form-select-sm text-end"
+          maxlength="10"
+          placeholder="100.00"
+          formControlName="km"
+          required>
+          <span class="input-group-text">Km</span>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="btn btn-primary btn-sm" style="width: 100%;" (click)="genear()">Generar</div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-5 col-form-label fw-bold">Horas de Recorrido:</label>
+      <div class="col-sm-4">
+        <div class="input-group input-group-sm">
+          <input
+          type="number"
+          readonly=""
+          class="form-control form-select-sm text-end"
+          maxlength="10"
+          placeholder="100"
+          formControlName="hours"
+          required>
+          <span class="input-group-text">Horas</span>
+        </div>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="btn btn-success" [disabled]="!tatulationform.valid" (click)="save()">Guardar</button>
+</mat-dialog-actions>

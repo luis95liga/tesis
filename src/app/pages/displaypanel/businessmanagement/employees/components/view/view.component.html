@@ -1,0 +1,48 @@
+
+<mat-toolbar class="text-white bg-primary">
+  <span>Empleado</span>
+  <span class="fill-remaining-space"></span>
+  <button mat-icon-button [mat-dialog-close]="true" aria-label="Example icon button with a vertical three dot icon">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-dialog-content class="">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-2 text-center">
+        <img [src]="img" width="100px" height="100px" srcset="">
+      </div>
+      <div class="col-sm-6">
+        <h5><span class="fw-bold">Cedula: </span> {{ employee. identificationcard }}</h5>
+        <h5><span class="fw-bold">Nombre: </span> {{ employee.names }}</h5>
+        <h5><span class="fw-bold">Fecha de Nacimiento: </span> {{ employee.birth_date }}</h5>
+      </div>
+      <div class="col-sm-4">
+        <div class="card1">
+          <h6 class="text">Datos del Nómina:</h6>
+          <div class="card-body1">
+            <h5><span class="fw-bold">Ocupación: </span> {{ employee.position }}</h5>
+            <h5><span class="fw-bold">Salario: </span> {{ employee.salary}}</h5>
+            <h5><span class="fw-bold">Periodo de Pago: </span> {{ employee.period_payment}}</h5>
+            <h5><span class="fw-bold">Fecha de Ingreso: </span> {{ employee.entry_date }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h5><span class="fw-bold">Teléfono de Domicilio: </span> {{ employee.phone }}</h5>
+      </div>
+      <div class="col">
+        <h5><span class="fw-bold">Teléfono Movil: </span> {{ employee.cell }}</h5>
+      </div>
+    </div>
+    <h5><span class="fw-bold">Localización: </span> {{ employee.location }}</h5>
+    <h5><span class="fw-bold">Dirección: </span> {{ employee.address }}</h5>
+    <h5><span class="fw-bold">Correo Electrónico: </span> {{ employee.email }}</h5>
+    <h5><span class="fw-bold">Observaciones: </span> {{ employee.observations }}</h5>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button type="button" class="btn btn-outline-success" (click)="downloadPDF()"><samp style="margin: 5px;"><i class="fa-solid fa-print"></i></samp>Imprimir</button>
+</mat-dialog-actions>

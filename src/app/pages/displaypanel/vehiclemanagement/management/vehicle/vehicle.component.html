@@ -1,0 +1,105 @@
+<div class="container-fluid">
+  <div class="mt-4"></div>
+  <nav aria-label="breadcrume">
+    <ol class="breadcrumb bre" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+      <li class="breadcrumb-item">
+        <a class="text-info-emphasis" [routerLink]="['/displaypanel']">
+          <i class="fa-solid fa-house"></i>
+        </a>
+      </li>
+      <li class="breadcrumb-item"><a [routerLink]="['/displaypanel/vehicle']">Vehículos</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Vehículo</li>
+    </ol>
+  </nav>
+  <div class="form-group d-flex justify-content-between">
+    <h4 class="fw-bold">Vehículos</h4>
+    <button class="btn btn-lg btn-success btn-sm" type="button" (click)="onOpenModalForm()"><i class="fa-solid fa-plus"></i></button>
+  </div>
+  <div class="mt-1"></div>
+  <div class="card">
+    <div class="mt-1"></div>
+    <div class="card-body">
+      <div class="d-flex justify-content-between">
+        <div class="mb-1 row text-black">
+        </div>
+        <div class="spacer1"></div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label fw-bold">Buscar:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control form-control-sm" (keyup)="applyFilter($event)" placeholder="Buscar">
+          </div>
+        </div>
+      </div>
+      <table mat-table [dataSource]="dataSource" class="table table-sm table-striped table-hover text-center">
+        <ng-container matColumnDef="idvehicle">
+          <th scope="col" *matHeaderCellDef>Id</th>
+          <td scope="row" *matCellDef="let element">{{ element.idvehicle }}</td>
+        </ng-container>
+        <ng-container matColumnDef="tuition">
+          <th scope="col" *matHeaderCellDef>Matricula(Placa)<th>
+          <td scope="row" *matCellDef="let element">{{ element.tuition }}</td>
+        </ng-container>
+        <ng-container matColumnDef="employee">
+          <th scope="col" *matHeaderCellDef>Conductor<th>
+          <td scope="row" *matCellDef="let element">{{ element.employee }}</td>
+        </ng-container>
+        <ng-container matColumnDef="vehicle_use">
+          <th scope="col" *matHeaderCellDef>Uso de Vehiculo<th>
+          <td scope="row" *matCellDef="let element">{{ element.vehicle_use }}</td>
+        </ng-container>
+        <ng-container matColumnDef="agination_date">
+          <th scope="col" *matHeaderCellDef>Fecha de Asignación<th>
+          <td scope="row" *matCellDef="let element">{{ element.agination_date }}</td>
+        </ng-container>
+        <ng-container matColumnDef="trailer">
+          <th scope="col" *matHeaderCellDef>Asignación Remolque<th>
+          <td scope="row" *matCellDef="let element" (click)="onOpenModalAssignTrailer(element)">
+            <button class="spacer btn btn-outline-success btn-sm">
+              <i class="fa-solid fa-trailer"></i>
+            </button>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th scope="col" *matHeaderCellDef>Costos</th>
+          <td scope="row" *matCellDef="let element">
+            <div class="">
+              <button class="spacer btn btn-outline-dark btn-sm" [matMenuTriggerFor]="costs" #menuTrigger>
+                <i class="fa-solid fa-money-bill"></i>
+              </button>
+              <mat-menu #costs="matMenu">
+                <button mat-menu-item (click)="onOpenModalGeneralData(element)">Datos Generales</button>
+                <button mat-menu-item (click)="onOpenModalFixedCosts(element)">Costo Fijos</button>
+                <button mat-menu-item (click)="onOpenModalMaintenanceCosts(element)">Costo Mantenimiento</button>
+                <!--<button mat-menu-item (click)="onOpenModalExtraCosts(element)">Costo Extras</button>-->
+              </mat-menu>
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="menu">
+          <th scope="col" *matHeaderCellDef>Aciones</th>
+          <td mat-cell *matCellDef="let element">
+            <div>
+              <button (click)="onOpenModalView(element)" class="spacer btn btn-outline-primary btn-sm">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+              <button (click)=" onOpenModalForm(element)" class="spacer btn btn-outline-warning btn-sm">
+                <i class="fa-solid fa-file-pen"></i>
+              </button>
+              <button (click)="delete(element)" class="spacer btn btn-outline-danger btn-sm">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" class=" table-sm"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns" class="v"></tr>
+      </table>
+      <mat-paginator #scheduledOrdersPaginator
+        [length]="length"
+        [pageSize]="5"
+        [pageSizeOptions]="pageSizeOptions"
+        aria-label="Select page">
+      </mat-paginator>
+    </div>
+  </div>
+</div>

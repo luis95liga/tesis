@@ -1,0 +1,126 @@
+<mat-toolbar class="text-white bg-primary">
+  <span>Perfil</span>
+  <span class="fill-remaining-space"></span>
+  <button mat-icon-button [mat-dialog-close]="true" >
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+</mat-toolbar>
+<mat-dialog-content class="mat-typography">
+    <form  [formGroup]="userform">
+        <div class="row">
+            <div class="col-sm-2 text-center">
+                <img class="card" [src]="img" width="100px" height="100px" srcset="">
+            </div>
+            <div class="col-sm-10">
+              <div class="row">
+                    <div class="col">
+                        <div class="form-group row">
+                            <label for="staticEmail" class="col-sm-2 col-form-label fw-bold">Nombre:</label>
+                            <div class="col-sm-10">
+                              <input type="text" [attr.disabled]="true" [ngClass]="{'is-invalid': isvalid('name') }" placeholder="Nombre" formControlName="name" class="form-control form-select-sm"  required>
+                              <small class="form-text text-danger" *ngIf="isvalid('name') || false">
+                                {{ errorMessage('name') }}
+                              </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group row">
+                            <label for="staticEmail" class="col-sm-2 col-form-label fw-bold">Apellido:</label>
+                            <div class="col-sm-10">
+                              <input type="text" [attr.disabled]="true" class="form-control form-select-sm" [ngClass]="{'is-invalid': isvalid('last_name') }" placeholder="Apellidos" formControlName="last_name" required>
+                              <small class="form-text text-danger" *ngIf="isvalid('last_name') || false">
+                                {{ errorMessage('last_name') }}
+                              </small>
+                            </div>
+                        </div>
+                    </div>
+              </div>
+              <div class="row">
+                    <div class="col">
+                      <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label fw-bold">Usuario:</label>
+                        <div class="col-sm-10">
+                            <input type="text" [attr.disabled]="true" class="form-control form-select-sm" [ngClass]="{'is-invalid': isvalid('username') }" placeholder="Nombre" formControlName="username" required>
+                            <small class="form-text text-danger" *ngIf="isvalid('username') || false">
+                                {{ errorMessage('username') }}
+                              </small>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group row">
+                            <label for="staticEmail" class="col-sm-2 col-form-label fw-bold">Logo:</label>
+                            <div class="col-sm-10">
+                              <input type="file" disabled="true" accept="image/png, image/jpeg" class="form-control form-select-sm" (change)="onChange($event)" required>
+                              <small class="form-text text-danger">
+                              </small>
+                            </div>
+                        </div>
+                    </div>
+              </div>
+              <div class="row">
+                  <div class="col">
+                      <div class="form-group row">
+                          <label for="staticEmail" class="col-sm-1 col-form-label fw-bold">Email:</label>
+                          <div class="col-sm-11">
+                              <input type="email" [attr.disabled]="true" class="form-control form-select-sm" [ngClass]="{'is-invalid': isvalid('email') }" placeholder="Nombre" formControlName="email" required>
+                              <small class="form-text text-danger" *ngIf="isvalid('email') || false">
+                                  {{ errorMessage('email') }}
+                              </small>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+        <br>
+    </form>
+    <form  [formGroup]="passwordform">
+      <div class="card1">
+        <h6 class="text">Datos del Viaje:</h6>
+        <div class="card-body1 row">
+          <div class="col-sm-4">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label fw-bold">Contraseña:</label>
+              <div class="col-sm-8">
+                <div class="input-group input-group-sm">
+                  <input [type]="hide ? 'password' : 'text'" formControlName="password" class="form-control" placeholder="Contraseña" [ngClass]="{'is-invalid': isvalid1('password') }" required>
+                  <span class="input-group-text" type="button" (click)="hide = !hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </span>
+                </div>
+                  <small class="form-text text-danger" *ngIf="isvalid1('password') || false">
+                      {{ errorMessage1('password') }}
+                  </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-5 col-form-label fw-bold">Repita la Contraseña:</label>
+              <div class="col-sm-7">
+                <div class="input-group input-group-sm">
+                  <input [type]="hide1 ? 'password' : 'text'" formControlName="password2" class="form-control" placeholder="Contraseña" [ngClass]="{'is-invalid': isvalid1('password2') }" required>
+                  <span class="input-group-text" type="button" (click)="hide1 = !hide1">
+                    <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </span>
+                </div>
+                  <small class="form-text text-danger" *ngIf="isvalid1('password2') || false">
+                      {{ errorMessage1('password2') }}
+                  </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="d-grid gap-2">
+              <button class="btn btn-success btn-sm" (click)="updatePassword()">Actualizar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="btn btn-success" (click)="update()" [disabled]="!userform.invalid">Guardar</button>
+</mat-dialog-actions>

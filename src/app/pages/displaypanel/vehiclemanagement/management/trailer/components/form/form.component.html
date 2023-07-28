@@ -1,0 +1,163 @@
+<mat-toolbar class="text-white bg-primary">
+    <span>{{ text }} Vehículo</span>
+    <span class="fill-remaining-space"></span>
+    <button mat-icon-button [mat-dialog-close]="true" aria-label="Example icon button with a vertical three dot icon">
+      <mat-icon>close</mat-icon>
+    </button>
+</mat-toolbar>
+<mat-dialog-content>
+  <form [formGroup]="trailerform">
+    <div class="col-sm-12">
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label fw-bold">Propietario:</label>
+        <div class="col-sm-10">
+          <select class="form-select form-select-sm" formControlName="idowner" [ngClass]="{'is-invalid': isvalid('idowner'), 'is-valid': trailerform.get('idowner').valid }">
+            <option value="">Seleccione</option>
+            <option *ngFor="let item of owners" [value]="item.idowner" >{{ item.name }} ( {{ item.company }} )</option>
+          </select>
+          <small class="form-text text-danger" *ngIf="isvalid('idowner') || false">
+            {{ errorMessage('idowner') }}
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="row align-items-center">
+      <div class="col-sm-1">
+        <img class="image text-center" [src]="img">
+      </div>
+      <div class="col-sm-11">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label fw-bold">Modelo:</label>
+              <div class="col-sm-9">
+                <select class="form-select form-select-sm" formControlName="idvehicle_model" [ngClass]="{'is-invalid': isvalid('idvehicle_model'), 'is-valid': trailerform.get('idvehicle_model').valid }" required>
+                  <option value="">seleccione uno</option>
+                  <option *ngFor="let item of vehiclemodels" [value]="item.idvehicle_model" >{{ item.manufacturer }} ( {{ item.model }} )</option>
+                </select>
+                <small class="form-text text-danger" *ngIf="isvalid('idvehicle_model') || false">
+                  {{ errorMessage('idvehicle_model') }}
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label fw-bold">Uso:</label>
+              <div class="col-sm-10">
+                <select class="form-select form-select-sm" formControlName="idvehicle_use" [ngClass]="{'is-invalid': isvalid('idvehicle_use'), 'is-valid': trailerform.get('idvehicle_use').valid }">
+                  <option value="">seleccione uno</option>
+                  <option *ngFor="let item of vehicleuse" [value]="item.idvehicle_use" >{{ item.vehicle_use }}</option>
+                </select>
+                <small class="form-text text-danger" *ngIf="isvalid('idvehicle_use') || false">
+                  {{ errorMessage('idvehicle_use') }}
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label fw-bold">Imagen:</label>
+          <div class="col-sm-10">
+            <input type="file" (change)="onChange($event)" class="form-control form-control-sm">
+            <small class="form-text text-danger">
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label fw-bold">Estado:</label>
+          <div class="col-sm-8">
+            <div class="form-check mt-2">
+              <input class="form-check-input" type="checkbox" checked="" formControlName="state">
+              <label class="form-check-label">Activo</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-8 card border-dark">
+        <h6 class="text">Datos de Identificación:</h6>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-7">
+              <div class="form-group row">
+                <label class="col-sm-5 col-form-label fw-bold" >Matricula(Placa):</label>
+                <div class="col-sm-7">
+                  <input type="text" (change)="IsTuitionValidate($event)" class="form-control form-control-sm" formControlName="tuition" [ngClass]="{'is-invalid': isvalid('tuition'), 'is-valid': trailerform.get('tuition').valid }">
+                  <small class="form-text text-danger" *ngIf="isvalid('tuition') || false">
+                    {{ errorMessage('tuition') }}
+                  </small>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label fw-bold">A.D:</label>
+                <div class="col-sm-10">
+                  <input type="number" min="1" pattern="^[0-9]+" class="form-control form-control-sm" formControlName="idadministrative_data" [ngClass]="{'is-invalid': isvalid('idadministrative_data'), 'is-valid': trailerform.get('idadministrative_data').valid }">
+                  <small class="form-text text-danger" *ngIf="isvalid('idadministrative_data') || false">
+                    {{ errorMessage('idadministrative_data') }}
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-5">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label fw-bold">Color:</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control form-control-sm" formControlName="color" [ngClass]="{'is-invalid': isvalid('color'), 'is-valid': trailerform.get('color').valid }">
+                  <small class="form-text text-danger" *ngIf="isvalid('color') || false">
+                    {{ errorMessage('color') }}
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group row">
+          <label class="col-sm-5 col-form-label fw-bold">Horas de Uso:</label>
+          <div class="col-sm-7">
+            <input type="number" min="1" pattern="^[0-9]+" class="form-control form-control-sm" formControlName="hours_use" [ngClass]="{'is-invalid': isvalid('hours_use'), 'is-valid': trailerform.get('hours_use').valid }">
+            <small class="form-text text-danger" *ngIf="isvalid('hours_use') || false">
+              {{ errorMessage('hours_use') }}
+            </small>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label fw-bold">Cap. Carga:</label>
+          <div class="col-sm-8">
+            <div class="input-group input-group-sm">
+              <input type="number" class="form-control" formControlName="load_capacity" [ngClass]="{'is-invalid': isvalid('load_capacity'), 'is-valid': trailerform.get('load_capacity').valid }">
+              <span class="input-group-text">Kg</span>
+            </div>
+            <small class="form-text text-danger" *ngIf="isvalid('load_capacity') || false">
+              {{ errorMessage('load_capacity') }}
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-2"></div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label fw-bold">Obserbación:</label>
+      <div class="col-sm-10">
+        <textarea type="text" class="form-control form-control-sm" rows="3" formControlName="observation" [ngClass]="{'is-invalid': isvalid('observation'), 'is-valid': trailerform.get('observation').valid }"></textarea>
+        <small class="form-text text-danger" *ngIf="isvalid('observation') || false">
+          {{ errorMessage('observation') }}
+        </small>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="btn btn-success" (click)="save()" [disabled]="!trailerform.valid" [mat-dialog-close]="true" cdkFocusInitial>Guardar</button>
+</mat-dialog-actions>
+

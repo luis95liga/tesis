@@ -1,0 +1,35 @@
+.bre{
+  background-color: #FBFCFC;
+  border: none;
+}
+
+.espacio{
+  margin-left: 10px;
+}
+
+.example-small-box, .example-large-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.small-box {
+  height: 200px;
+  width: 200px;
+}
+
+.example-large-box {
+  height: 300px;
+  width: 300px;
+}
+
+.tab{
+  display: grid;
+}
+
+h3{
+  font-family: Arial, Helvetica, sans-serif;
+}

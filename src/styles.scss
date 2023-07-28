@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootswatch/dist/cosmo/variables";
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../node_modules/bootswatch/dist/cosmo/bootswatch";
+@import "../node_modules/bootswatch/dist/cosmo/bootstrap.min.css";
+@import '../node_modules/ngx-toastr/toastr.css';
+// importing core styling file
+@import "./assets/scss/fontawesome.scss";
+
+// our project needs Classic Solid, Brands, regular
+@import "./assets/scss/solid.scss";
+@import "./assets/scss/brands.scss";
+@import "./assets/scss/regular.scss";
+
+html, body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Gill Sans, system-ui, sans-serif;
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto;
+}

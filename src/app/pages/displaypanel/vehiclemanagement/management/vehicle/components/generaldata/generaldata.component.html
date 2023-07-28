@@ -1,0 +1,79 @@
+<mat-toolbar class="text-white bg-primary">
+  <span>Datos Generales</span>
+  <span class="fill-remaining-space"></span>
+  <button mat-icon-button [mat-dialog-close]="true">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-dialog-content style="max-height: unset !important;">
+  <form [formGroup]="generaldataform">
+    <div class="form-group row">
+      <label class="col-sm-8 col-form-label fw-bold">N° KILÓMETROS PROMEDIO MES</label>
+      <div class="col-sm-4">
+        <input type="number" min="1" step="0.05" formControlName="nkmmonth" class="form-control form-control-sm text-end" placeholder="0.00" [ngClass]="{'is-invalid': isvalid('nkmmonth'), 'is-valid': generaldataform.get('nkmmonth').valid }">
+        <small class="form-text text-danger" *ngIf="isvalid('nkmmonth') || false">
+          {{ messageerror('nkmmonth') }}
+        </small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-8 col-form-label fw-bold">N° DE VIAJES AL MES:</label>
+      <div class="col-sm-4">
+        <input type="number" min="1" step="1" formControlName="ntravelkmmonth" class="form-control form-control-sm text-end" placeholder="0.00" [ngClass]="{'is-invalid': isvalid('ntravelkmmonth'), 'is-valid': generaldataform.get('ntravelkmmonth').valid }">
+        <small class="form-text text-danger" *ngIf="isvalid('ntravelkmmonth') || false">
+          {{  messageerror('ntravelkmmonth') }}
+        </small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="staticEmail" class="col-sm-8 col-form-label fw-bold">GASTOS ADMINISTRATIVOS MES</label>
+      <div class="col-sm-4">
+        <input type="number" min="1" step="0.05" formControlName="adminexpensesmonth" class="form-control form-control-sm text-end" placeholder="0.00" [ngClass]="{'is-invalid': isvalid('adminexpensesmonth'), 'is-valid': generaldataform.get('adminexpensesmonth').valid }">
+        <small class="form-text text-danger" *ngIf="isvalid('adminexpensesmonth') || false">
+          {{ messageerror('adminexpensesmonth') }}
+        </small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="staticEmail" class="col-sm-8 col-form-label fw-bold">SERVICIOS BÁSICOS MES</label>
+      <div class="col-sm-4">
+        <input type="number" min="1" step="0.05" formControlName="basicservicesmonth" class="form-control form-control-sm text-end" placeholder="0.00" [ngClass]="{'is-invalid': isvalid('basicservicesmonth'), 'is-valid': generaldataform.get('basicservicesmonth').valid }">
+        <small class="form-text text-danger" *ngIf="isvalid('basicservicesmonth') || false">
+          {{ messageerror('basicservicesmonth') }}
+        </small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="staticEmail" class="col-sm-8 col-form-label fw-bold">GARAJE</label>
+      <div class="col-sm-4">
+        <input type="number" min="1" step="0.05" formControlName="garage" class="form-control form-control-sm text-end" placeholder="0.00" [ngClass]="{'is-invalid': isvalid('garage'), 'is-valid': generaldataform.get('garage').valid }">
+        <small class="form-text text-danger" *ngIf="isvalid('garage') || false">
+          {{ messageerror('garage') }}
+        </small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="staticEmail" class="col-sm-8 col-form-label fw-bold">PERMISOS Y HABILITACIONES</label>
+      <div class="col-sm-4">
+        <input type="number" min="1" step="0.05" formControlName="permitsqualifications" class="form-control form-control-sm text-end" placeholder="0.00" [ngClass]="{'is-invalid': isvalid('permitsqualifications'), 'is-valid': generaldataform.get('permitsqualifications').valid }">
+        <small class="form-text text-danger" *ngIf="isvalid('permitsqualifications') || false">
+          {{ messageerror('permitsqualifications') }}
+        </small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="staticEmail" class="col-sm-8 col-form-label fw-bold">VALOR DEL VEHÍCULO</label>
+      <div class="col-sm-4">
+        <input type="number" min="1" step="0.05" formControlName="vehiclevalue" class="form-control form-control-sm text-end" placeholder="0.00" [ngClass]="{'is-invalid': isvalid('vehiclevalue'), 'is-valid': generaldataform.get('vehiclevalue').valid }">
+        <small class="form-text text-danger" *ngIf="isvalid('vehiclevalue') || false">
+          {{ messageerror('vehiclevalue') }}
+        </small>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button class="btn btn-success" (click)="save()" [disabled]="!generaldataform.valid">Guardar</button>
+</mat-dialog-actions>

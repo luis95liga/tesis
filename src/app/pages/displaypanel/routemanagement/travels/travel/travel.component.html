@@ -1,0 +1,833 @@
+<div class="container-fluid">
+  <div class="mt-4"></div>
+  <nav aria-label="breadcrume">
+    <ol class="breadcrumb" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+      <li class="breadcrumb-item"><a [routerLink]="['/displaypanel']"><i class="fa-solid fa-house"></i></a></li>
+      <li class="breadcrumb-item"><a [routerLink]="['/displaypanel/route']">Rutas</a></li>
+      <li class="breadcrumb-item"><a [routerLink]="['/displaypanel/route/travels']">Viajes</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Viaje</li>
+    </ol>
+  </nav>
+  <div class="form-group d-flex justify-content-between">
+    <h4 class="fw-bold">Datos del Viaje</h4>
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <button class="btn btn-success btn-sm" type="button" [disabled]="!travelform.valid" (click)="savedraft()">
+        <i class="fa-solid fa-pen-ruler"></i>
+      </button>
+      <button class="btn btn-info btn-sm" type="button"  [disabled]="!travelform.valid"   (click)="save()">
+        <i class="fa-solid fa-floppy-disk"></i>
+      </button>
+      <button class="btn btn-danger btn-sm" type="button" [disabled]="travelform.valid"   (click)="cacel()">
+        <i class="fa-solid fa-trash"></i>
+      </button>
+      <button class="btn btn-primary btn-sm" type="button" [disabled]="travelform.valid" (click)="newdata()">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+      <button class="btn btn-dark btn-sm" type="button" [disabled]="travelform.valid" (click)="reoladdata()" *ngIf="reolad !! false">
+        <i class="fa-solid fa-rotate-right"></i>
+      </button>
+    </div>
+  </div>
+  <div class="mt-1"></div>
+  <div class="card">
+    <form [formGroup]="travelform">
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="card1">
+            <h6 class="text">Datos del Viaje:</h6>
+            <div class="card-body1">
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-group mt-1">
+                    <div class="input-group input-group-sm">
+                      <button class="btn btn-dark" (click)="onOpenModalTrailer()">Vehículo</button>
+                      <input type="text" placeholder="Buscar" [formControl]="control" [matAutocomplete]="auto" class="form-control form-control-sm">
+                      <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let item of filteredvehicle | async" [value]="item">
+                          {{ item }}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-5">
+                  <div class="form-group mt-1">
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text fw-bold">Conductor:</span>
+                      <input
+                        type="text"
+                        readonly=""
+                        formControlName="employee"
+                        class="form-control form-control-sm"
+                        [ngClass]="{'is-invalid': isvalid('employee'), 'is-valid': travelform.get('employee')?.valid }"
+                        placeholder="Nombre Apellido">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group mt-1">
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text fw-bold">Remolques:</span>
+                      <input
+                        type="text"
+                        readonly=""
+                        class="form-control form-control-sm"
+                        [ngClass]="{'is-invalid': isvalid('tuition'), 'is-valid': travelform.get('tuition')?.valid }"
+                        formControlName="tuition"
+                        aria-label="Amount (to the nearest dollar)">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-2"></div>
+              <div class="row"  *ngIf="guiaData || false">
+                <div class="col-sm-4">
+                  <div class="form-group mt-1">
+                    <div class="input-group input-group-sm">
+                      <button class="btn btn-dark" (click)="onGuide()">Guias</button>
+                      <input
+                        type="text"
+                        formControlName="guide"
+                        [ngClass]="{'is-invalid': isvalid('guide'), 'is-valid': travelform.get('guide')?.valid }"
+                        readonly=""
+                        class="form-control form-control-sm">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-8">
+                  <div class="form-group mt-1">
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text fw-bold">Trayecto:</span>
+                      <input
+                        type="text"
+                        formControlName="trayect"
+                        [ngClass]="{'is-invalid': isvalid('trayect'), 'is-valid': travelform.get('trayect')?.valid }"
+                        readonly=""
+                        class="form-control form-control-sm">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-2"></div>
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text fw-bold">Cliente:</span>
+                      <input
+                        type="text"
+                        formControlName="client"
+                        readonly=""
+                        [ngClass]="{'is-invalid': isvalid('client'), 'is-valid': travelform.get('client')?.valid }"
+                        class="form-control form-control-sm">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group mt-1">
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text fw-bold">Kms.Recorrido:</span>
+                      <input
+                        type="number"
+                        formControlName="kms"
+                        [ngClass]="{'is-invalid': isvalid('kms'), 'is-valid': travelform.get('kms')?.valid }"
+                        min="0"
+                        step="0.10"
+                        pattern="^[0-9]+"
+                        class="form-control form-control-sm text-end" placeholder="100">
+                      <span class="input-group-text fw-bold">Km</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group mt-1">
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text fw-bold">Kms.Desvío:</span>
+                      <input
+                        type="number"
+                        (change)="onKms($event)"
+                        formControlName="kmsdes"
+                        step="1"
+                        [ngClass]="{'is-invalid': isvalid('kmsdes'), 'is-valid': travelform.get('kmsdes')?.valid }"
+                        class="form-control form-control-sm text-end"
+                        placeholder="10">
+                      <span class="input-group-text fw-bold">Km</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-2"></div>
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="form-group mt-1">
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text fw-bold">Fecha de Salidad:</span>
+                      <input
+                        type="date"
+                        formControlName="datestart"
+                        [ngClass]="{'is-invalid': isvalid('datestart'), 'is-valid': travelform.get('datestart')?.valid }"
+                        class="form-control form-control-sm"
+                        placeholder="12/12/2023">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-5">
+                  <div class="form-group mt-1">
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text fw-bold">Fecha de Llegada:</span>
+                      <input
+                        type="date"
+                        formControlName="dateend"
+                        [ngClass]="{'is-invalid': isvalid('dateend'), 'is-valid': travelform.get('dateend')?.valid }"
+                        class="form-control form-control-sm"
+                        placeholder="12/12/2023">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-group mt-1">
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text fw-bold">Horas:</span>
+                      <input
+                        type="number"
+                        formControlName="hours"
+                        step="1"
+                        [ngClass]="{'is-invalid': isvalid('hours'), 'is-valid': travelform.get('hours')?.valid }"
+                        class="form-control form-control-sm text-end"
+                        placeholder="10">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-1"></div>
+          <div class="card1">
+            <h6 class="text">Relación de Pago:</h6>
+            <div class="card-body1">
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="form-group mt-1">
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text fw-bold">Salario:</span>
+                      <input
+                        type="number"
+                        readonly=""
+                        formControlName="salary"
+                        [ngClass]="{'is-invalid': isvalid('salary'), 'is-valid': travelform.get('salary')?.valid }"
+                        class="form-control form-control-sm text-end"
+                        placeholder="100">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="card1">
+                    <h6 class="text">Alimentación:</h6>
+                    <div class="card-body1">
+                      <div class="form-group mt-1">
+                        <div class="input-group input-group-sm">
+                          <span class="input-group-text fw-bold">Básico:</span>
+                          <input
+                          type="number"
+                          (change)="onfeeding($event)"
+                          [ngClass]="{'is-invalid': isvalid('feeding'), 'is-valid': travelform.get('feeding')?.valid }"
+                          formControlName="feeding"
+                          class="form-control form-control-sm text-end"
+                          placeholder="100">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group mt-1">
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text fw-bold">Salario Total:</span>
+                      <input
+                        type="number"
+                        formControlName="totalsalary"
+                        [ngClass]="{'is-invalid': isvalid('totalsalary'), 'is-valid': travelform.get('totalsalary')?.valid }"
+                        class="form-control form-control-sm text-end"
+                        placeholder="100">
+                    </div>
+                  </div>
+                  <div class="mt-2"></div>
+                  <div class="form-group mt-1">
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text fw-bold">Total a Percibir:</span>
+                      <input
+                        type="number"
+                        formControlName="receivesalary"
+                        [ngClass]="{'is-invalid': isvalid('receivesalary'), 'is-valid': travelform.get('receivesalary')?.valid }"
+                        class="form-control form-control-sm text-end"
+                        placeholder="100">
+                    </div>
+                  </div>
+                  <div class="mt-2"></div>
+                  <div class="form-group mt-1">
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text fw-bold">
+                        <div class="form-check">
+                          <input
+                            (change)="onStay($event)"
+                            formControlName="stay"
+                            [ngClass]="{'is-invalid': isvalid('stay'), 'is-valid': travelform.get('stay')?.valid }"
+                            class="form-check-input form-check-input-sm"
+                            type="checkbox">
+                          <label class="form-check-label">Estadía:</label>
+                        </div>
+                      </span>
+                      <input
+                        type="number"
+                        step="1"
+                        (change)="onfeeding($event)"
+                        formControlName="s"
+                        [ngClass]="{'is-invalid': isvalid('s'), 'is-valid': travelform.get('s')?.valid }"
+                        class="form-control form-control-sm text-end"
+                        placeholder="1">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="card1">
+            <h6 class="text1">Rendimiento de Combustible:</h6>
+            <div class="card-body1">
+              <div class="form-group mt-1">
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text fw-bold">Km/lt:</span>
+                  <input
+                    type="number"
+                    readonly=""
+                    formControlName="kml"
+                    [ngClass]="{'is-invalid': isvalid('kml'), 'is-valid': travelform.get('kml')?.valid }"
+                    class="form-control form-control-sm text-end"
+                    placeholder="100">
+                </div>
+              </div>
+              <div class="mt-2"></div>
+              <div class="form-group mt-1">
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text fw-bold">Lt Est:</span>
+                  <input
+                    type="number"
+                    readonly=""
+                    formControlName="ltes"
+                    [ngClass]="{'is-invalid': isvalid('ltes'), 'is-valid': travelform.get('ltes')?.valid }"
+                    class="form-control form-control-sm text-end"
+                    placeholder="100">
+                </div>
+              </div>
+              <div class="mt-2"></div>
+              <div class="form-group mt-1">
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text fw-bold">Lt/Gast:</span>
+                  <input
+                    type="number"
+                    (change)="ondif($event)"
+                    step="1"
+                    formControlName="ltgas"
+                    [ngClass]="{'is-invalid': isvalid('ltgas'), 'is-valid': travelform.get('ltgas')?.valid }"
+                    class="form-control form-control-sm text-end"
+                    placeholder="100">
+                </div>
+              </div>
+              <div class="mt-2"></div>
+              <div class="form-group mt-1">
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text fw-bold">Km/Lt(R):</span>
+                  <input
+                    type="number"
+                    readonly=""
+                    formControlName="tank"
+                    class="form-control form-control-sm text-end"
+                    placeholder="100">
+                </div>
+              </div>
+              <div class="mt-2"></div>
+              <div class="form-group mt-1">
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text fw-bold">Diferencia:</span>
+                  <input
+                    type="number"
+                    readonly=""
+                    formControlName="dif"
+                    [ngClass]="{'is-invalid': isvalid('dif'), 'is-valid': travelform.get('dif')?.valid }"
+                    class="form-control form-control-sm text-end"
+                    placeholder="100">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-1"></div>
+          <div class="card1">
+            <h6 class="text">Uso del Vehiculo:</h6>
+            <div class="card-body1">
+              <div class="form-group">
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text">
+                    <i class="fa-solid fa-truck-front"></i>
+                  </span>
+                  <input
+                    type="text"
+                    readonly=""
+                    formControlName="vehicle_use"
+                    [ngClass]="{'is-invalid': isvalid('vehicle_use'), 'is-valid': travelform.get('vehicle_use')?.valid }"
+                    class="form-control form-control-sm"
+                    placeholder="Uso Vehiculo">
+                </div>
+              </div>
+              <div class="mt-2"></div>
+              <div class="form-group">
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text">
+                    <i class="fa-solid fa-trailer"></i>
+                  </span>
+                  <input
+                    type="text"
+                    readonly=""
+                    formControlName="trailer_use"
+                    [ngClass]="{'is-invalid': isvalid('trailer_use'), 'is-valid': travelform.get('trailer_use')?.valid }"
+                    class="form-control form-control-sm"
+                    placeholder="Uso Vehiculo">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="card1" *ngIf="totalresult || false">
+            <h6 class="text">Resultados: </h6>
+            <div class="card-body1">
+              <div class="form-group">
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text">
+                    SubTotal:
+                  </span>
+                  <input
+                    type="text"
+                    formControlName="subtotal"
+                    [ngClass]="{'is-invalid': isvalid('subtotal'), 'is-valid': travelform.get('subtotal')?.valid }"
+                    class="form-control form-control-sm text-end"
+                    placeholder="00.00">
+                </div>
+              </div>
+              <div class="mt-2"></div>
+              <div class="form-group">
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text">
+                    Porcentaje:
+                  </span>
+                  <select
+                    class="form-select form-select-sm text-end"
+                    (change)="porcentageSelect($event)"
+                    formControlName="percentage"
+                    [ngClass]="{'is-invalid': isvalid('percentage'), 'is-valid': travelform.get('percentage')?.valid }">
+                    <option *ngFor="let item of porcentage" [value]="item">{{ item }} %</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mt-2"></div>
+              <div class="form-group">
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text">
+                    Total:
+                  </span>
+                  <input
+                    type="text"
+                    formControlName="total"
+                    [ngClass]="{'is-invalid': isvalid('total'), 'is-valid': travelform.get('total')?.valid }"
+                    class="form-control form-control-sm text-end"
+                    placeholder="00.00">
+                </div>
+              </div>
+              <div class="mt-2"></div>
+              <div class="form-group">
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text">
+                    Rentabilidad:
+                  </span>
+                  <input
+                    type="text"
+                    formControlName="profitability"
+                    [ngClass]="{'is-invalid': isvalid('profitability'), 'is-valid': travelform.get('profitability')?.valid }"
+                    class="form-control form-control-sm text-end"
+                    placeholder="00.00">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card2">
+            <div class="card-body1">
+              <div class="form-group">
+                <label class="form-label mt-1 fw-bold">Observaciones:</label>
+                <textarea
+                  class="form-control form-control-sm"
+                  formControlName="observations"
+                  [ngClass]="{'is-invalid': isvalid('observations'), 'is-valid': travelform.get('observations')?.valid }"
+                  rows="4"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <button class="btn btn-sm btn-outline-info" type="button" (click)="GenerateTotal()">Generar Resultados</button>
+  </div>
+  <div class="mt-1"></div>
+  <div class="card">
+    <form [formGroup]="vehiclerelationshipform">
+      <table class="table table-dark table-sm">
+        <thead>
+          <tr class="">
+            <th scope="col">KM ORIGEN-DESTINO</th>
+            <th scope="col">KM X VIAJE</th>
+            <th scope="col">VIAJES X MES</th>
+            <th scope="col">TOTAL KM X MES</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input readonly="" formControlName="kmOD" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+            <td><input readonly="" formControlName="kmV" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+            <td><input readonly="" formControlName="kmM" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+            <td><input readonly="" formControlName="TKmM" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+    <mat-tab-group>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <i class="tab-icon fa-solid fa-money-bill-trend-up"></i>
+          COSTOS FIJOS
+        </ng-template>
+        <form [formGroup]="fixedcostsform">
+          <table class="table table-sm">
+            <thead>
+              <tr class="table-primary">
+                <th scope="col" width="70%">NOMBRE</th>
+                <th scope="col">COSTO ANUAL</th>
+                <th scope="col">MES	</th>
+                <th scope="col">COSTO KM</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Sueldos y prestaciones sociales</th>
+                <td><input readonly="" formControlName="salaryA" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100" value="9600"></td>
+                <td><input readonly="" formControlName="salary" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100" value="800"></td>
+                <td><input readonly="" formControlName="salaryKm"  class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100" value="0.12"></td>
+              </tr>
+              <tr>
+                <th>Garaje</th>
+                <td><input readonly="" formControlName="garageA" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100" value="300"></td>
+                <td><input readonly="" formControlName="garage" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"value="25"></td>
+                <td><input readonly="" formControlName="garageKm" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100" value="0.004"></td>
+              </tr>
+              <tr>
+                <th>Matriculación vehicular (impuesto ambiental, cabezal, plataforma, otros)</th>
+                <td><input readonly="" formControlName="registrationA" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="registration" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="registrationKm" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+              </tr>
+              <tr>
+                <th>Seguros: vehículos, carga</th>
+                <td><input readonly="" formControlName="sureA" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100" value="6360"></td>
+                <td><input readonly="" formControlName="sure" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="sureKm" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100" value="0,07943"></td>
+              </tr>
+              <tr>
+                <th>Revisiones técnicas</th>
+                <td><input readonly="" formControlName="revisionA" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="revision" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="revisionKm" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+              </tr>
+              <tr>
+                <th>Gastos administrativos (contribuciones filiales, gastos de representación)</th>
+                <td><input readonly="" formControlName="billsA" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="bills" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="billsKm" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+              </tr>
+              <tr>
+                <th>Servicios Básicos (luz, agua, teléfono convencional - celular, internet)	</th>
+                <td><input readonly="" formControlName="servicesA" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="services" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="servicesKm" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+              </tr>
+              <tr>
+                <th>Costos financieros (cuota interés letra vehículo)</th>
+                <td><input readonly="" formControlName="costsA" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100" value="0"></td>
+                <td><input readonly="" formControlName="costs" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100" value="0"></td>
+                <td><input readonly="" formControlName="costsKm" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100" value="0"></td>
+              </tr>
+              <tr>
+                <th>Depreciación del vehículo</th>
+                <td><input readonly="" formControlName="depreciationsA" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="depreciations" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="depreciationsKm" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+              </tr>
+              <tr>
+                <th>Permisos y habilitaciones	</th>
+                <td><input readonly="" formControlName="permissionsA" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="permissions" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="permissionsKm" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+              </tr>
+
+              <tr>
+                <th>Rastreo satelital GPS</th>
+                <td><input readonly="" formControlName="gpsA" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="gps" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="gpsKm" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+              </tr>
+              <tr>
+                <th>Póliza andina</th>
+                <td><input readonly="" formControlName="policiesA" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="policies" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="policiesKm" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+              </tr>
+              <tr class="table-warning fw-bold">
+                <td></td>
+                <td></td>
+                <th class="text-end">TOTAL</th>
+                <td><input readonly="" formControlName="total" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100" value="0,406"></td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <i class="tab-icon fa-solid fa-money-bill"></i>
+          COSTOS MANTENIMIENTO
+        </ng-template>
+        <form  [formGroup]="maintenamcecostsform">
+          <table class="table table-sm">
+            <thead>
+              <tr class="table-primary">
+                <th scope="col" width="55%">NOMBRE</th>
+                <th scope="col">COSTO ANUAL</th>
+                <th scope="col">COSTO MES</th>
+                <th scope="col">COSTO X Km</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>LLANTAS Y ALINEACIÓN</th>
+                <td><input readonly="" formControlName="tirealignmentA" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="tirealignment" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="tirealignmentKm" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+              </tr>
+              <tr>
+                <th>MANTENIMIENTO ORDINARIO</th>
+                <td><input readonly="" formControlName="ordinarymaintenanceA" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="ordinarymaintenance" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="ordinarymaintenanceKm" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+              </tr>
+              <tr>
+                <th>SISTEMA ELÉCTRICO</th>
+                <td><input readonly="" formControlName="electricsystemA" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="electricsystem" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="electricsystemKm" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+              </tr>
+              <tr>
+                <th>SISTEMA DE FRENOS</th>
+                <td><input readonly="" formControlName="brakingsystemA" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="brakingsystem" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="brakingsystemKm" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+              </tr>
+              <tr>
+                <th>SUSPENSIÓN</th>
+                <td><input readonly="" formControlName="suspensionA" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="suspension" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="suspensionKm" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+              </tr>
+              <tr>
+                <th>SISTEMA DE TRANSMISIÓN</th>
+                <td><input readonly="" formControlName="transmissionsystemA" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="transmissionsystem" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="transmissionsystemKm" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+              </tr>
+              <tr>
+                <th>REPARACIÓN DE MOTOR</th>
+                <td><input readonly="" formControlName="enginerepairA" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="enginerepair" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td><input readonly="" formControlName="enginerepairKm" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+              </tr>
+              <tr class="table-warning fw-bold">
+                <td></td>
+                <td></td>
+                <th class="text-end">TOTAL</th>
+                <td><input readonly="" formControlName="total" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100" readonly=""></td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <i class="tab-icon fa-solid fa-money-bills"></i>
+          COSTOS EXTRAS
+        </ng-template>
+        <form [formGroup]="extracostform">
+          <table class="table table-sm">
+            <thead>
+              <tr class="table-primary">
+                <th scope="col" width="65%">NOMBRE</th>
+                <th scope="col">COSTO VIAJE</th>
+                <th scope="col">KILÓMETROS X VIAJE</th>
+                <th scope="col">CANTIDAD X VIAJE</th>
+                <th scope="col">COSTO X KM</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>DIESEL</th>
+                <td>
+                  <input
+                    readonly=""
+                    formControlName="dieselCostv" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td>
+                  <input
+                    readonly=""
+                    formControlName="dieselKmv" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td>
+                  <input
+                    readonly=""
+                    formControlName="dieselCantv" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td>
+                  <input
+                    readonly=""
+                    formControlName="dieselCostKm" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+              </tr>
+              <tr>
+                <th>PEAJE</th>
+                <td>
+                  <input
+                    readonly=""
+                    formControlName="tollCostv" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td>
+                  <input
+                    readonly=""
+                    formControlName="tollKmv" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td>
+                  <input
+                    readonly=""
+                    formControlName="tollCantv" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td>
+                  <input
+                    readonly=""
+                    formControlName="tollCostKm" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+              </tr>
+              <tr>
+                <th>VIÁTICOS</th>
+                <td>
+                  <input
+                    readonly=""
+                    formControlName="viaticCostv" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td>
+                  <input
+                    readonly=""
+                    formControlName="viaticKmv" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td>
+                  <input
+                    readonly=""
+                    formControlName="viaticCantv" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td>
+                  <input
+                    readonly=""
+                    formControlName="viaticCostKm" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+              </tr>
+              <tr>
+                <th>PESAS Y BALANZA</th>
+                <td>
+                  <input
+                    readonly=""
+                    formControlName="weightsScaleCostv" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td>
+                  <input
+                    readonly=""
+                    formControlName="weightsScaleKmv" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td>
+                  <input
+                    readonly=""
+                    formControlName="weightsScaleCantv" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td>
+                  <input
+                    readonly=""
+                    formControlName="weightsScaleCostKm" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+              </tr>
+              <tr>
+                <th>CARGUE Y DESCARGUE</th>
+                <td>
+                  <input
+                    readonly=""
+                    formControlName="loadDownloadCostv" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td>
+                  <input
+                    readonly=""
+                    formControlName="loadDownloadKmv" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td>
+                  <input
+                    readonly=""
+                    formControlName="loadDownloadCantv" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td>
+                  <input
+                    readonly=""
+                    formControlName="loadDownloadCostKm" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+              </tr>
+              <tr>
+                <th>CARAVANA</th>
+                <td>
+                  <input
+                    readonly=""
+                    formControlName="caravanCostv" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td>
+                  <input
+                    readonly=""
+                    formControlName="caravanKmv" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td>
+                  <input
+                    readonly=""
+                    formControlName="caravanCantv" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+                <td>
+                  <input
+                    readonly=""
+                    formControlName="caravanCostKm" class="form-control form-control-sm text-end" min="0" step="0.01" pattern="^[0-9]+" type="number" placeholder="100"></td>
+              </tr>
+              <tr class="table-warning fw-bold">
+                <td></td>
+                <td></td>
+                <td></td>
+                <th class="text-end">TOTAL</th>
+                <td>
+                  <input
+                    readonly=""
+                    formControlName="total"
+                    class="form-control form-control-sm text-end"
+                    type="number"
+                    placeholder="100">
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+      </mat-tab>
+    </mat-tab-group>
+    <table class="table">
+      <tbody>
+        <tr class="table-dark">
+          <td width="70%">
+          </td>
+          <th class="text-end" width="20%">Total Egresos:</th>
+          <td><input readonly="" class="form-control form-control-sm text-end" type="number" min="0" step="0.01" placeholder="100" [value]="totalvalue"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

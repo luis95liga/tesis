@@ -1,0 +1,26 @@
+<mat-toolbar class="text-white bg-primary">
+  <span>vehículos</span>
+  <span class="fill-remaining-space"></span>
+  <button mat-icon-button mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-dialog-content>
+  <div class="card">
+    <div class="card-body">
+      <section class="example-section">
+        <mat-radio-group [(ngModel)]="labelPosition" class="radio-group">
+          <mat-radio-button class="radio-button"  *ngFor="let item of vehicle" [value]="item.idvehicle">
+            <mat-list-item>
+              <div matListItemTitle><samp class="fw-bold">Vehículo: </samp>{{ item.tuition }}</div>
+              <div matListItemLine><samp class="fw-bold">Conductor: </samp>{{ item.employee }}</div>
+            </mat-list-item>
+          </mat-radio-button>
+        </mat-radio-group>
+      </section>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="btn btn-success" cdkFocusInitial (click)="save()">Guardar</button>
+</mat-dialog-actions>

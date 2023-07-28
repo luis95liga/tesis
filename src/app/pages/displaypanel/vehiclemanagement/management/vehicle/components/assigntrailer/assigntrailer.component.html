@@ -1,0 +1,72 @@
+<mat-toolbar class="text-white bg-success">
+  <span>Asignar Remolque</span>
+  <span class="fill-remaining-space"></span>
+  <button mat-icon-button [mat-dialog-close]="true" aria-label="Example icon button with a vertical three dot icon">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-dialog-content style="max-height: unset !important;">
+  <div class="card1 border-dark">
+    <h6 class="text fw-bold">Datos de Identificación:</h6>
+    <div class="card-body1">
+      <form [formGroup]="assigntrailerfrom">
+        <div class="form-group row">
+          <input type="hidden" formControlName="idvehicle">
+          <label class="col-sm-5 col-form-label fw-bold">Fecha de Agisnación:</label>
+          <div class="col-sm-7">
+            <input type="date" class="form-control form-control-sm" formControlName="dateassign" [ngClass]="{'is-invalid': isvalid('dateassign'), 'is-valid': assigntrailerfrom.get('dateassign').valid }">
+            <small class="form-text text-danger" *ngIf="isvalid('dateassign') || false">
+              {{ errorMessage('dateassign') }}
+            </small>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-5 col-form-label fw-bold">Observaciones:</label>
+          <div class="col-sm-7">
+            <textarea type="date" formControlName="observations" class="form-control form-control-sm" rows="2"></textarea>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row" style="max-height: unset !important;">
+    <div class="col-sm-5">
+      <div class="form-group">
+        <form  [formGroup]="traileform">
+          <label class="form-label fw-bold">Remolques Disponibles:</label>
+          <select size="4" class="form-select form-select-sm" formControlName="id">
+            <option *ngFor="let item of result" [value]="item.idtrailer"> {{ item.tuition }} </option>
+          </select>
+        </form>
+      </div>
+    </div>
+    <div class="col-sm-2 text-center align-self-end">
+      <div class="d-grid gap-1">
+        <button type="button" class="btn btn-outline-primary btn-sm" [disabled]="!traileform.valid" (click)="selcion()">
+          <i class="fa-solid fa-chevron-right"></i>
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        <div class="mt-2"></div>
+        <button type="button" class="btn btn-outline-primary btn-sm" [disabled]="!datafrom.valid" (click)="unselcion()">
+          <i class="fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+      </div>
+    </div>
+    <div class="col-sm-5">
+      <div class="form-group">
+        <label class="form-label fw-bold">Remolques Agisnados:</label>
+        <form  [formGroup]="datafrom">
+          <select size="4" class="form-select form-select-sm" formControlName="id">
+            <option *ngFor="let item of data1" [value]="item.idtrailer"> {{ item.tuition }} </option>
+          </select>
+        </form>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button type="button" class="btn btn-danger" (click)="delete()" *ngIf="!(data1.length > 0)">Eliminar Aginación</button>
+  <button type="button" class="btn btn-success" (click)="save()" [disabled]="!assigntrailerfrom.valid" *ngIf="data1.length > 0">Guardar</button>
+</mat-dialog-actions>

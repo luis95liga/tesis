@@ -1,0 +1,97 @@
+<div class="container-fluid body">
+  <div class="mt-4"></div>
+  <nav aria-label="breadcrume">
+    <ol class="breadcrumb" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+      <li class="breadcrumb-item"><a [routerLink]="['/displaypanel']"><i class="fa-solid fa-house"></i></a></li>
+      <li class="breadcrumb-item"><a [routerLink]="['/displaypanel/route']">Rutas</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Viajes</li>
+    </ol>
+  </nav>
+  <div class="form-group d-flex justify-content-between">
+    <h4 class="fw-bold">Matrix de Costos</h4>
+    <button class="btn btn-lg btn-success btn-sm" (click)="onOpenModal()">
+      <i class="fa-solid fa-plus"></i>
+      <span style="margin-left: 10px;"></span>
+      Nuevo Dato
+    </button>
+  </div>
+  <div class="mt-1"></div>
+  <div class="card">
+    <div class="card-body">
+      <div class="d-flex justify-content-between">
+        <div class="mb-1 row text-black">
+        </div>
+        <div class="spacer1"></div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label fw-bold">Buscar:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control form-control-sm" (keyup)="applyFilter($event)" placeholder="Buscar">
+          </div>
+        </div>
+      </div>
+      <!--'idtatulation', 'org', 'des', 'km','actions', 'fle', 'cos'-->
+      <table mat-table [dataSource]="dataSource" class="table table-sm text-center table-striped table-hover">
+        <ng-container matColumnDef="idtabulation">
+          <th scope="col" *matHeaderCellDef>Id</th>
+          <td scope="row" *matCellDef="let element">{{ element.idtabulation }}</td>
+        </ng-container>
+        <ng-container matColumnDef="location">
+          <th scope="col" *matHeaderCellDef>Origen<th>
+          <td scope="row" *matCellDef="let element">{{ element.location }}</td>
+        </ng-container>
+        <ng-container matColumnDef="destinations">
+          <th scope="col" *matHeaderCellDef>Destio<th>
+          <td scope="row" *matCellDef="let element">{{ element.destinations }}</td>
+        </ng-container>
+        <ng-container matColumnDef="km">
+          <th scope="col" *matHeaderCellDef>km<th>
+          <td scope="row" *matCellDef="let element">{{ element.km }}</td>
+        </ng-container>
+        <ng-container matColumnDef="hours">
+          <th scope="col" *matHeaderCellDef>Horas<th>
+          <td scope="row" *matCellDef="let element">{{ element.hours }}</td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th scope="col" *matHeaderCellDef><i class="fa-solid fa-left-right"></i></th>
+          <td scope="row" *matCellDef="let element">
+            <button type="button" class="btn btn-outline-dark btn-sm spacer" (click)="onOpenModal(element)">
+              <i class="fa-solid fa-left-right"></i>
+            </button>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="cos" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button [matMenuTriggerFor]="beforeMenu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #beforeMenu="matMenu" xPosition="before">
+              <button mat-menu-item (click)="onOpenModalFreight(element)">
+                <mat-icon>add</mat-icon>
+                <span>Tarifas de Fletes</span>
+              </button>
+              <button mat-menu-item (click)="onOpenModalBills(element)">
+                <mat-icon>add</mat-icon>
+                <span>Tarifas de Costos</span>
+              </button>
+            </mat-menu>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="8">No hay Datos</td>
+        </tr>
+
+      </table>
+      <mat-paginator #scheduledOrdersPaginator
+      [length]="length"
+      [pageSize]="5"
+      [pageSizeOptions]="pageSizeOptions"
+      aria-label="Select page">
+      </mat-paginator>
+
+    </div>
+  </div>
+</div>

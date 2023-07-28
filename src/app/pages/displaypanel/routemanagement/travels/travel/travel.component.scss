@@ -1,0 +1,59 @@
+.sp{
+  width: 100%;
+}
+
+fieldset {
+  border: 1px solid #000;
+}
+
+.text {
+  width: 80px;
+  font-size: xx-small;
+  font-style: oblique;
+  font-weight: bold;
+  margin-top: -5px;
+  margin-left: 5px;
+  background: white;
+  display: block;
+}
+
+.text1 {
+  width: 140px;
+  font-size: xx-small;
+  font-style: oblique;
+  font-weight: bold;
+  margin-top: -5px;
+  margin-left: 5px;
+  background: white;
+  display: block;
+}
+
+.card1 {
+  border: solid 1px #000;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.card2 {
+  margin: 5px;
+}
+
+.card-body2 {
+  margin: 5px;
+}
+.card-body1 {
+  margin: 5px;
+}
+
+.tab-icon {
+  margin-right: 8px;
+}
+
+.fullscreen-dialog {
+  max-width: 100% !important;
+}
+
+span{
+  background-color: rgb(255, 255, 255);
+  color: #000;
+}

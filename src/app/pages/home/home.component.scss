@@ -1,0 +1,23 @@
+.content {
+  background: url('./../../../assets/img/fondo1.png') no-repeat center left;
+  height: 89.5%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.login {
+  margin: 20px;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  display: block;
+}
+
+.spacer {
+  margin-right: 10px;
+}
+
+.cl {
+  background-color: aquamarine;
+}

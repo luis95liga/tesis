@@ -1,0 +1,174 @@
+<mat-toolbar class="text-white bg-primary">
+  <span>Detalle Guia N° 00001</span>
+  <span class="fill-remaining-space"></span>
+  <button mat-icon-button mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-dialog-content style="max-height: unset !important;">
+  <form [formGroup]="guidedetail">
+    <div class="row">
+      <div class="col-sm-4">
+        <h6>Datos de Comprobante de Venta</h6>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Tipo:</label>
+          <div class="col-sm-10">
+            <select class="form-select form-select-sm">
+              <option value="">Selcione Uno</option>
+              <option *ngFor="let item of invoicetypes" [value]="item.idinvoicetype">{{ item.invoicetype }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-form-label col-form-label-sm">No. AUTORIZACIÓN:</label>
+          <input type="text" class="form-control form-control-sm">
+        </div>
+        <div class="form-group">
+          <label class="col-form-label col-form-label-sm">No. DEL COMPROBANTE:</label>
+          <input type="text" class="form-control form-control-sm">
+        </div>
+        <div class="form-group">
+          <label class="col-form-label col-form-label-sm">Número de declaración aduanera:</label>
+          <input type="text" class="form-control form-control-sm">
+        </div>
+        <div class="form-group">
+          <label class="col-form-label col-form-label-sm">Motivo del traslado:</label>
+          <input type="text" class="form-control form-control-sm">
+        </div>
+        <div class="form-group">
+          <label class="col-form-label col-form-label-sm">Punto de partida:</label>
+          <input
+            type="text"
+            formControlName="location"
+            class="form-control form-control-sm">
+        </div>
+        <div class="form-group">
+          <label class="col-form-label col-form-label-sm">Destino (punto de llegada):</label>
+          <input
+            type="text"
+            formControlName="destinations"
+            class="form-control form-control-sm">
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <div class="row">
+          <div class="col-sm">
+            <h6>Identificación del destinatario</h6>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">R.U.C/C.I:</label>
+              <div class="col-sm-9">
+                <input
+                  type="text"
+                  formControlName="identificationcard"
+                  class="form-control form-control-sm">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Razón social:</label>
+              <div class="col-sm-8">
+                <input
+                  type="text"
+                  formControlName="client"
+                  class="form-control form-control-sm">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm">
+            <h6>Identificación del transportista</h6>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">R.U.C/C.I:</label>
+              <div class="col-sm-9">
+                <input
+                  type="text"
+                  formControlName="ruc"
+                  class="form-control form-control-sm">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Razón social:</label>
+              <div class="col-sm-8">
+                <input
+                  type="text"
+                  formControlName="company"
+                  class="form-control form-control-sm">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Placa:</label>
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  formControlName="tuition"
+                  class="form-control form-control-sm">
+              </div>
+            </div>
+          </div>
+        </div>
+        <table class="table table-sm table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Detalle</th>
+              <th scope="col">Unidad</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="50%">
+                <input type="text" class="form-control form-control-sm">
+              </td>
+              <td>
+                <select class="form-select form-select-sm">
+                  <option value="">Selcione Uno</option>
+                  <option *ngFor="let item of units" [value]="item.idunit">{{ item.unit }}</option>
+                </select>
+              </td>
+              <td>
+                <input type="text" class="form-control form-control-sm">
+              </td>
+              <td>
+                <button class="spacer btn btn-outline-success btn-sm">
+                  <i class="fa-solid fa-angles-down"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table mat-table [dataSource]="dataSource" class="table table-striped table-hover">
+          <ng-container matColumnDef="idguide">
+            <th scope="col" *matHeaderCellDef>N° Guia</th>
+            <td scope="row" *matCellDef="let element">0000</td>
+          </ng-container>
+          <ng-container matColumnDef="company">
+            <th scope="col" *matHeaderCellDef>Empresa
+            <th>
+            <td scope="row" *matCellDef="let element">s</td>
+          </ng-container>
+          <ng-container matColumnDef="location">
+            <th scope="col" *matHeaderCellDef>Bodega
+            <th>
+            <td scope="row" *matCellDef="let element">d</td>
+          </ng-container>
+          <ng-container matColumnDef="client">
+            <th scope="col" *matHeaderCellDef>Cliente</th>
+            <td scope="row" *matCellDef="let element">d</td>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <th scope="col" *matHeaderCellDef></th>
+            <td scope="row" *matCellDef="let element">
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="8">No hay Datos</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="btn btn-success btn-sm">Guardar</button>
+</mat-dialog-actions>

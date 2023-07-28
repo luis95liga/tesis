@@ -1,0 +1,84 @@
+<div class="container-fluid">
+  <div class="mt-4"></div>
+  <nav aria-label="breadcrume">
+    <ol class="breadcrumb" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+      <li class="breadcrumb-item">
+        <a class="text-info-emphasis" [routerLink]="['/displaypanel']">
+          <i class="fa-solid fa-house"></i>
+        </a>
+      </li>
+      <li class="breadcrumb-item"><a [routerLink]="['/displaypanel/client']">Cliente</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Clientes</li>
+    </ol>
+  </nav>
+  <div class="card">
+    <div class="card-body">
+      <div class="d-flex justify-content-between">
+        <samp style="margin-left: 10px;"></samp>
+        <div class="mb-1 row text-black">
+          <button class="btn btn-sm btn btn-outline-success" type="button" (click)="onOpenModalForm()">Nuevo Cliente</button>
+        </div>
+        <div class="spacer1"></div>
+        <div class="form-outline">
+          <input type="search" id="form1" class="form-control" (keyup)="applyFilter($event)" placeholder="Search" aria-label="Search" />
+        </div>
+      </div>
+      <div class="mt-2"></div>
+      <!--'idclient', 'identificationcard', 'names','entry_date','cell','phone','location','actions'-->
+      <table mat-table [dataSource]="dataSource" class="table table-striped table-hover">
+        <ng-container matColumnDef="idclient">
+          <th scope="col" *matHeaderCellDef>Id</th>
+          <td scope="row" *matCellDef="let element">{{ element.idclient }}</td>
+        </ng-container>
+        <ng-container matColumnDef="identificationcard">
+          <th scope="col" *matHeaderCellDef>Cedula<th>
+          <td scope="row" *matCellDef="let element">{{ element.identificationcard }}</td>
+        </ng-container>
+        <ng-container matColumnDef="names">
+          <th scope="col" *matHeaderCellDef>Nombres<th>
+          <td scope="row" *matCellDef="let element">{{ element.names }}</td>
+        </ng-container>
+        <ng-container matColumnDef="entry_date">
+          <th scope="col" *matHeaderCellDef>Fechas de Creación<th>
+          <td scope="row" *matCellDef="let element">{{ element.entry_date }}</td>
+        </ng-container>
+        <ng-container matColumnDef="cell">
+          <th scope="col" *matHeaderCellDef>Telefono<th>
+          <td scope="row" *matCellDef="let element">{{ element.cell }}</td>
+        </ng-container>
+        <ng-container matColumnDef="phone">
+          <th scope="col" *matHeaderCellDef>Telefono del Trabajo<th>
+          <td scope="row" *matCellDef="let element">{{ element.phone }}</td>
+        </ng-container>
+        <ng-container matColumnDef="destinations">
+          <th scope="col" *matHeaderCellDef>Localizacion<th>
+          <td scope="row" *matCellDef="let element">{{ element.destinations }}</td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th scope="col" *matHeaderCellDef>Actiones</th>
+          <td scope="row" *matCellDef="let element">
+            <div class="">
+              <button (click)="onOpenModalForm(element)" class="spacer btn btn-outline-warning">
+                <i class="fa-solid fa-file-pen"></i>
+              </button>
+              <button (click)="onOpenModalView(element)" class="spacer btn btn-outline-primary">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+              <button (click)="delete(element.idclient)" class="spacer btn btn-outline-danger">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <mat-paginator #scheduledOrdersPaginator
+      [length]="length"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      aria-label="Select page">
+      </mat-paginator>
+    </div>
+  </div>
+</div>

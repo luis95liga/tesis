@@ -1,0 +1,91 @@
+<mat-toolbar class="text-white bg-primary">
+  <span>Costos</span>
+  <span class="fill-remaining-space"></span>
+  <button mat-icon-button mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-dialog-content style="max-height: unset !important;">
+  <div class="d-flex">
+    <div class="p-2 flex-grow-1">
+      <div *ngIf="new">
+        <form  [formGroup]="billform" class="row">
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label fw-bold">Concepto:</label>
+              <div class="col-sm-10">
+                <select class="form-select form-select-sm" formControlName="idconcepts" [ngClass]="{'is-invalid': isvalid('idconcepts'), 'is-valid': billform.get('idconcepts').valid }" required>
+                  <option value="">seleccione uno</option>
+                  <option *ngFor="let item of concepts" [value]="item.idconcepts" >{{ item.concepts }}</option>
+                </select>
+                <small class="invalid-feedback" *ngIf="isvalid('idconcepts') || false">
+                  {{ errorMessage('idconcepts') }}
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label fw-bold">Monto:</label>
+              <div class="col-sm-10">
+                <div class="input-group input-group-sm mb-3">
+                  <span class="input-group-text">$</span>
+                  <input
+                    type="number"
+                    class="form-control form-control-sm"
+                    [ngClass]="{'is-invalid': isvalid('amount'), 'is-valid': billform.get('amount').valid }"
+                    formControlName="amount"
+                    placeholder=""
+                    slot="0.10"
+                    >
+                  <small class="invalid-feedback" *ngIf="isvalid('amount') || false">
+                    {{ errorMessage('amount') }}
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="p-2">
+      <button type="button" (click)="New(new)" class="btn btn-outline-success btn-sm">
+        <i class="fa-solid" [ngClass]="{'fa-plus': !new, 'fa-check': new }"></i>
+      </button>
+      <samp style="margin: 5px;" *ngIf="new"></samp>
+      <button type="button" *ngIf="new" (click)="cancel(new)" class="btn btn-outline-danger btn-sm">
+        <i class="fa-solid fa-x"></i>
+      </button>
+    </div>
+  </div>
+  <!--'idbill','concepts','amount','actions'-->
+  <table mat-table [dataSource]="dataSource" class="table table-striped table-hover text-center">
+    <ng-container matColumnDef="idbill">
+      <th scope="col" *matHeaderCellDef>Id</th>
+      <td scope="row" *matCellDef="let element">{{ element.idbill }}</td>
+    </ng-container>
+    <ng-container matColumnDef="concepts">
+      <th scope="col" *matHeaderCellDef>Documento<th>
+      <td scope="row" *matCellDef="let element">{{ element.concepts }}</td>
+    </ng-container>
+    <ng-container matColumnDef="amount">
+      <th scope="col" *matHeaderCellDef>Monto<th>
+      <td scope="row" *matCellDef="let element">{{ element.amount }}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th scope="col" *matHeaderCellDef>Actiones</th>
+      <td scope="row" *matCellDef="let element">
+        <div class="">
+          <button (click)="Edit(element.idbill)" class="spacer btn btn-outline-warning">
+            <i class="fa-solid fa-file-pen"></i>
+          </button>
+          <button (click)="delete(element.idbill)" class="spacer btn btn-outline-danger">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</mat-dialog-content>

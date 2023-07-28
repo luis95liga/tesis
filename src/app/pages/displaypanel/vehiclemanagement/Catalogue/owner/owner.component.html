@@ -1,0 +1,106 @@
+<div class="container-fluid">
+  <div class="mt-4"></div>
+  <ol class="breadcrumb" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+    <li class="breadcrumb-item">
+      <a [routerLink]="['/displaypanel']">
+        <i class="fa-solid fa-house"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item"><a [routerLink]="[ '/displaypanel/vehicle/' ]">Vehículos</a></li>
+    <li class="breadcrumb-item active">Propietarios</li>
+  </ol>
+  <div class="form-group d-flex justify-content-between">
+    <h4 class="fw-bold">Propietario</h4>
+    <button class="btn btn-lg btn-primary btn-sm" type="button" (click)="New()"><i class="fa-solid fa-plus"></i></button>
+  </div>
+  <div class="mt-1"></div>
+  <div class="card">
+    <form [formGroup]="ownerform" class="card-body">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label fw-bold">Nombre:</label>
+            <div class="col-sm-10">
+              <input type="text" placeholder="Nombre" class="form-control form-control-sm" [ngClass]="{'is-invalid': isvalid('name'), 'is-valid': ownerform.get('name').valid }" formControlName="name">
+              <small class="form-text text-danger" class="text-danger" *ngIf="isvalid('name') || false">
+                {{ errorMessage('name') }}
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-5">
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label fw-bold">Empresa:</label>
+            <div class="col-sm-10">
+              <select class="form-select form-select-sm" formControlName="idcompany" [ngClass]="{'is-invalid': isvalid('idcompany'), 'is-valid': ownerform.get('idcompany').valid }">
+                <option value="">Selecione Uno...</option>
+                <option *ngFor="let opt of company" [value]="opt.idcompany"> {{ opt.name }}</option>
+              </select>
+              <small class="form-text text-danger" *ngIf="isvalid('idcompany')">
+                {{ errorMessage('idcompany') }}
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-1">
+          <button type="button" class="spacer btn btn-outline-success btn-sm" [disabled]="!ownerform.valid" (click)="save()">
+            <i class="fa-solid fa-floppy-disk"></i>
+          </button>
+          <button type="button" class="spacer btn btn-outline-danger btn-sm" [disabled]="!ed" (click)="cancel()">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="mt-1"></div>
+  <div class="card">
+    <div class="card-body">
+      <div class="d-flex justify-content-between">
+        <div class="mb-1 row text-black"></div>
+        <div class="spacer1"></div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label fw-bold">Buscar:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control form-control-sm" (keyup)="applyFilter($event)" placeholder="Buscar">
+          </div>
+        </div>
+      </div>
+      <table mat-table [dataSource]="dataSource" class="table table-striped table-hover">
+        <ng-container matColumnDef="idowner">
+          <th scope="col" *matHeaderCellDef>Id</th>
+          <td scope="row" *matCellDef="let element">{{ element.idowner }}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th scope="col" *matHeaderCellDef>Propietario<th>
+          <td scope="row" *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
+        <ng-container matColumnDef="company">
+          <th scope="col" *matHeaderCellDef>Empresa<th>
+          <td scope="row" *matCellDef="let element">{{ element.company }}</td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th scope="col" *matHeaderCellDef>Actiones</th>
+          <td scope="row" *matCellDef="let element">
+            <div class="">
+              <button (click)="edit(element.idowner)" class="spacer btn btn-outline-warning">
+                <i class="fa-solid fa-file-pen"></i>
+              </button>
+              <button (click)="delete(element.idowner)" class="spacer btn btn-outline-danger">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <mat-paginator #scheduledOrdersPaginator
+      [length]="length"
+      [pageSize]="5"
+      [pageSizeOptions]="pageSizeOptions"
+      aria-label="Select page">
+      </mat-paginator>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,165 @@
+<div class="container-fluid">
+  <div class="mt-4"></div>
+  <nav aria-label="breadcrume">
+    <ol class="breadcrumb bre" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+      <li class="breadcrumb-item">
+        <a class="text-info-emphasis" [routerLink]="['/displaypanel']">
+          <i class="fa-solid fa-house"></i>
+        </a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Vehículos</li>
+    </ol>
+  </nav>
+  <div class="row">
+    <div class="col">
+      <a class="btn card text-white bg-primary mb-3" [routerLink]="['vehicle/']">
+        <div class="row">
+          <div class="col-sm-4">
+            <img src="./../../../../assets/img/icons8-camión-100.png" class="dd">
+          </div>
+          <div class="col-sm-8 text-end">
+            <br>
+            <h3>Vehículos</h3>
+            <h5>Gestión</h5>
+          </div>
+        </div>
+        <div class="card-footer text-center">
+          <i class="fa-solid fa-gears"></i>
+          Más Información
+        </div>
+      </a>
+    </div>
+    <div class="col">
+      <a class="btn card text-white bg-success mb-3" [routerLink]="['trailer/']">
+        <div class="row">
+          <div class="col-sm-4  btn-primary">
+            <img src="./../../../../assets/img/icons8-remolque-100.png" class="dd">
+          </div>
+          <div class="col-sm-8 text-end">
+            <br>
+            <h3>Remolque</h3>
+            <h5>Gestión</h5>
+          </div>
+        </div>
+        <div class="card-footer text-center">
+          <i class="fa-solid fa-gears"></i>
+          Más Información
+        </div>
+      </a>
+    </div>
+    <div class="col">
+      <a class="btn card text-white bg-secondary mb-3" [routerLink]="['model/']">
+        <div class="row">
+          <div class="col-sm-4  btn-primary">
+            <img src="./../../../../assets/img/icons8-truck-semi-trailer-100.png" class="dd">
+          </div>
+          <div class="col-sm-8 text-end">
+            <br>
+            <h3>Modelos</h3>
+            <h5>Catálogo Básico</h5>
+          </div>
+        </div>
+        <div class="card-footer text-center">
+          <i class="fa-solid fa-gears"></i>
+          Más Información
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <a class="btn card text-white bg-success mb-3" [routerLink]="['manufacturer/']">
+        <div class="row">
+          <div class="col-sm-4  btn-primary">
+            <img src="./../../../../assets/img/icons8-motor-de-jet-100.png" class="dd">
+          </div>
+          <div class="col-sm-8 text-end">
+            <br>
+            <h3>Fabricante</h3>
+            <h5>Catálogo Básico</h5>
+          </div>
+        </div>
+        <div class="card-footer text-center">
+          <i class="fa-solid fa-gears"></i>
+          Más Información
+        </div>
+      </a>
+    </div>
+    <div class="col">
+      <a class="btn card text-white bg-warning mb-3" [routerLink]="['owner/']">
+        <div class="row">
+          <div class="col-sm-4  btn-primary">
+            <img src="./../../../../assets/img/icons8-hombre-de-negocios-100.png" class="dd">
+          </div>
+          <div class="col-sm-8 text-end">
+            <br>
+            <h3>Propietario</h3>
+            <h5>Catálogo Básico</h5>
+          </div>
+        </div>
+        <div class="card-footer text-center">
+          <i class="fa-solid fa-gears"></i>
+          Más Información
+        </div>
+      </a>
+    </div>
+    <div class="col">
+      <a class="btn card text-white bg-info mb-3" [routerLink]="['vehicle-type/']">
+        <div class="row">
+          <div class="col-sm-4  btn-primary">
+            <img src="./../../../../assets/img/icons8-camión-verificado-100.png" class="dd">
+          </div>
+          <div class="col-sm-8 text-end">
+            <br>
+            <h3>Tipos</h3>
+            <h5>Catálogo Básico</h5>
+          </div>
+        </div>
+        <div class="card-footer text-center">
+          <i class="fa-solid fa-gears"></i>
+          Más Información
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <a class="btn card text-white bg-danger mb-3" [routerLink]="['vehicle-use/']">
+        <div class="row">
+          <div class="col-sm-4  btn-primary">
+            <img src="./../../../../assets/img/icons8-en-tránsito-100.png" class="dd">
+          </div>
+          <div class="col-sm-8 text-end">
+            <br>
+            <h3>Usos</h3>
+            <h5>Catálogo Básico</h5>
+          </div>
+        </div>
+        <div class="card-footer text-center">
+          <i class="fa-solid fa-gears"></i>
+          Más Información
+        </div>
+      </a>
+    </div>
+    <div class="col">
+      <a class="btn card text-white bg-primary mb-3" [routerLink]="['fuel/']">
+        <div class="row">
+          <div class="col-sm-4  btn-primary">
+            <img src="./../../../../assets/img/icons8-dispensador-de-gasolina-100.png" class="dd">
+          </div>
+          <div class="col-sm-8 text-end">
+            <br>
+            <h3>Combustibles</h3>
+            <h5>Catálogo Básico</h5>
+          </div>
+        </div>
+        <div class="card-footer text-center">
+          <i class="fa-solid fa-gears"></i>
+          Más Información
+        </div>
+      </a>
+    </div>
+  </div>
+
+</div>
+

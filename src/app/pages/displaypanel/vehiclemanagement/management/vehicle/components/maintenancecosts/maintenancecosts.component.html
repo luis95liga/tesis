@@ -1,0 +1,2317 @@
+<mat-toolbar class="text-white bg-primary">
+  <span>Costos Mantenimiento</span>
+  <span class="fill-remaining-space"></span>
+  <button mat-icon-button [mat-dialog-close]="true"
+    aria-label="Example icon button with a vertical three dot icon">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-dialog-content style="max-height: unset !important;">
+  <cdk-virtual-scroll-viewport itemSize="50" style="height: 470px !important;">
+    <form [formGroup]="maintenancecostsform">
+      <table class="table table-sm">
+        <thead>
+          <tr class="table-dark">
+            <th scope="col" width="45%">NOMBE</th>
+            <th scope="col">COSTO UNIDAD</th>
+            <th scope="col">DURACIÓN Km</th>
+            <th scope="col">CANTIDAD</th>
+            <th scope="col">COSTO X Km</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" colspan="5" class="table-primary text-center">LLANTAS Y ALINEACIÓN</th>
+          </tr>
+          <tr>
+            <th scope="row">LLANTAS DELANTERAS</th>
+            <td>
+              <input (change)="onData('fronttires')" formControlName="fronttiresCu"
+                class="form-control form-control-sm text-end"
+                required type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('fronttiresCu'), 'is-valid': maintenancecostsform.get('fronttiresCu').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('fronttiresCu') || false">
+                {{ errorMessage('fronttiresCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('fronttires')" formControlName="fronttiresDkm"
+                class="form-control form-control-sm text-end"
+                required type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('fronttiresDkm'), 'is-valid': maintenancecostsform.get('fronttiresDkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('fronttiresDkm') || false">
+                {{ errorMessage('fronttiresDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('fronttires')" formControlName="fronttiresQ"
+                class="form-control form-control-sm text-end"
+                required type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('fronttiresQ'), 'is-valid': maintenancecostsform.get('fronttiresQ').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('fronttiresQ') || false">
+                {{ errorMessage('fronttiresQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="fronttiresCkm" readonly=""
+                readonly=""
+                class="form-control form-control-sm text-end"
+                required type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('fronttiresCkm'), 'is-valid': maintenancecostsform.get('fronttiresCkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('fronttiresCkm') || false">
+                {{ errorMessage('fronttiresCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">LLANTAS DE TRACCIÓN</th>
+            <td>
+              <input (change)="onData('drivetires')" formControlName="drivetiresCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('drivetiresCu'), 'is-valid': maintenancecostsform.get('drivetiresCu').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('drivetiresCu') || false">
+                {{ errorMessage('drivetiresCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('drivetires')" formControlName="drivetiresDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('drivetiresDkm'), 'is-valid': maintenancecostsform.get('drivetiresDkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('drivetiresDkm') || false">
+                {{ errorMessage('drivetiresDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('drivetires')" formControlName="drivetiresQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('drivetiresQ'), 'is-valid': maintenancecostsform.get('drivetiresQ').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('drivetiresQ') || false">
+                {{ errorMessage('drivetiresQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="drivetiresCkm" readonly=""
+                readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('drivetiresCkm'), 'is-valid': maintenancecostsform.get('drivetiresCkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('drivetiresCkm') || false">
+                {{ errorMessage('drivetiresCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">LLANTAS DE ARRASTRE</th>
+            <td>
+              <input (change)="onData('dragtires')" formControlName="dragtiresCu"
+                class="form-control form-control-sm text-end"
+                required type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('dragtiresCu'), 'is-valid': maintenancecostsform.get('dragtiresCu').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('dragtiresCu') || false">
+                {{ errorMessage('dragtiresCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('dragtires')" formControlName="dragtiresDkm"
+                class="form-control form-control-sm text-end"
+                required type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('dragtiresDkm'), 'is-valid': maintenancecostsform.get('dragtiresDkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('dragtiresDkm') || false">
+                {{ errorMessage('dragtiresDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('dragtires')" formControlName="dragtiresQ"
+                class="form-control form-control-sm text-end"
+                required type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('dragtiresQ'), 'is-valid': maintenancecostsform.get('dragtiresQ').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('dragtiresQ') || false">
+                {{ errorMessage('dragtiresQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="dragtiresCkm" readonly=""
+                readonly=""
+                class="form-control form-control-sm text-end"
+                required type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('dragtiresCkm'), 'is-valid': maintenancecostsform.get('dragtiresCkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('dragtiresCkm') || false">
+                {{ errorMessage('dragtiresCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">RINES</th>
+            <td>
+              <input (change)="onData('wheels')" formControlName="wheelsCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('wheelsCu'), 'is-valid': maintenancecostsform.get('wheelsCu').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('wheelsCu') || false">
+                {{ errorMessage('wheelsCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('wheels')" formControlName="wheelsDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('wheelsDkm'), 'is-valid': maintenancecostsform.get('wheelsDkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('wheelsDkm') || false">
+                {{ errorMessage('wheelsDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('wheels')" formControlName="wheelsQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('wheelsQ'), 'is-valid': maintenancecostsform.get('wheelsQ').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('wheelsQ') || false">
+                {{ errorMessage('wheelsQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="wheelsCkm" readonly=""
+                readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('wheelsCkm'), 'is-valid': maintenancecostsform.get('wheelsCkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('wheelsCkm') || false">
+                {{ errorMessage('wheelsCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">PINCHAZOS Y DAÑOS</th>
+            <td>
+              <input (change)="onData('puncturesanddamage')" formControlName="puncturesanddamageCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('puncturesanddamageCu'), 'is-valid': maintenancecostsform.get('puncturesanddamageCu').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('puncturesanddamageCu') || false">
+                {{ errorMessage('puncturesanddamageCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('puncturesanddamage')" formControlName="puncturesanddamageDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('puncturesanddamageDkm'), 'is-valid': maintenancecostsform.get('puncturesanddamageDkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('puncturesanddamageDkm') || false">
+                {{ errorMessage('puncturesanddamageDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('puncturesanddamage')" formControlName="puncturesanddamageQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('puncturesanddamageQ'), 'is-valid': maintenancecostsform.get('puncturesanddamageQ').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('puncturesanddamageQ') || false">
+                {{ errorMessage('puncturesanddamageQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="puncturesanddamageCkm" readonly=""
+                readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('puncturesanddamageCkm'), 'is-valid': maintenancecostsform.get('puncturesanddamageCkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('puncturesanddamageCkm') || false">
+                {{ errorMessage('puncturesanddamageCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">ALINEACIÓN</th>
+            <td>
+              <input (change)="onData('alignment')" formControlName="alignmentCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('alignmentCu'), 'is-valid': maintenancecostsform.get('alignmentCu').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('alignmentCu') || false">
+                {{ errorMessage('alignmentCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('alignment')" formControlName="alignmentDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('alignmentDkm'), 'is-valid': maintenancecostsform.get('alignmentDkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('alignmentDkm') || false">
+                {{ errorMessage('alignmentDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('alignment')" formControlName="alignmentQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('alignmentQ'), 'is-valid': maintenancecostsform.get('alignmentQ').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('alignmentQ') || false">
+                {{ errorMessage('alignmentQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="alignmentCkm" readonly=""
+                readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('alignmentCkm'), 'is-valid': maintenancecostsform.get('alignmentCkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('alignmentCkm') || false">
+                {{ errorMessage('alignmentCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">BALANCEO</th>
+            <td>
+              <input (change)="onData('swinging')" formControlName="swingingCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('swingingCu'), 'is-valid': maintenancecostsform.get('swingingCu').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('swingingCu') || false">
+                {{ errorMessage('swingingCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('swinging')" formControlName="swingingDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('swingingDkm'), 'is-valid': maintenancecostsform.get('swingingDkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('swingingDkm') || false">
+                {{ errorMessage('swingingDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('swinging')" formControlName="swingingQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('swingingQ'), 'is-valid': maintenancecostsform.get('swingingQ').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('swingingQ') || false">
+                {{ errorMessage('swingingQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="swingingCkm" readonly=""
+                readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('swingingCkm'), 'is-valid': maintenancecostsform.get('swingingCkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('swingingCkm') || false">
+                {{ errorMessage('swingingCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="5" class="table-primary text-center">MANTENIMIENTO ORDINARIO</th>
+          </tr>
+          <tr>
+            <th scope="row">CAMBIO DE ACEITE</th>
+            <td>
+              <input (change)="onData('oilchange')" formControlName="oilchangeCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('oilchangeCu'), 'is-valid': maintenancecostsform.get('oilchangeCu').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('oilchangeCu') || false">
+                {{ errorMessage('oilchangeCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('oilchange')" formControlName="oilchangeDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('oilchangeDkm'), 'is-valid': maintenancecostsform.get('oilchangeDkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('oilchangeDkm') || false">
+                {{ errorMessage('oilchangeDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('oilchange')" formControlName="oilchangeQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('oilchangeQ'), 'is-valid': maintenancecostsform.get('oilchangeQ').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('oilchangeQ') || false">
+                {{ errorMessage('oilchangeQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="oilchangeCkm" readonly=""
+                readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('oilchangeCkm'), 'is-valid': maintenancecostsform.get('oilchangeCkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('oilchangeCkm') || false">
+                {{ errorMessage('oilchangeCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">ACEITE CAJA Y TRANSMISIÓN</th>
+            <td>
+              <input (change)="onData('casetransmissionoil')" formControlName="casetransmissionoilCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('casetransmissionoilCu'), 'is-valid': maintenancecostsform.get('casetransmissionoilCu').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('casetransmissionoilCu') || false">
+                {{ errorMessage('casetransmissionoilCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('casetransmissionoil')" formControlName="casetransmissionoilDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('casetransmissionoilDkm'), 'is-valid': maintenancecostsform.get('casetransmissionoilDkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('casetransmissionoilDkm') || false">
+                {{ errorMessage('casetransmissionoilDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('casetransmissionoil')" formControlName="casetransmissionoilQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('casetransmissionoilQ'), 'is-valid': maintenancecostsform.get('casetransmissionoilQ').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('casetransmissionoilQ') || false">
+                {{ errorMessage('casetransmissionoilQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="casetransmissionoilCkm" readonly=""
+                readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('casetransmissionoilCkm'), 'is-valid': maintenancecostsform.get('casetransmissionoilCkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('casetransmissionoilCkm') || false">
+                {{ errorMessage('casetransmissionoilCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">FILTROS DE AIRE</th>
+            <td>
+              <input (change)="onData('airfilters')" formControlName="airfiltersCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('airfiltersCu'), 'is-valid': maintenancecostsform.get('airfiltersCu').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('airfiltersCu') || false">
+                {{ errorMessage('airfiltersCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('airfilters')" formControlName="airfiltersDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('airfiltersDkm'), 'is-valid': maintenancecostsform.get('airfiltersDkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('airfiltersDkm') || false">
+                {{ errorMessage('airfiltersDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('airfilters')" formControlName="airfiltersQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('airfiltersQ'), 'is-valid': maintenancecostsform.get('airfiltersQ').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('airfiltersQ') || false">
+                {{ errorMessage('airfiltersQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="airfiltersCkm" readonly=""
+                readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('airfiltersCkm'), 'is-valid': maintenancecostsform.get('airfiltersCkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('airfiltersCkm') || false">
+                {{ errorMessage('airfiltersCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">LUBRICANTES/FLUIDOS</th>
+            <td>
+              <input (change)="onData('lubricantsfluids')" formControlName="lubricantsfluidsCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('lubricantsfluidsCu'), 'is-valid': maintenancecostsform.get('lubricantsfluidsCu').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('lubricantsfluidsCu') || false">
+                {{ errorMessage('lubricantsfluidsCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('lubricantsfluids')" formControlName="lubricantsfluidsDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('lubricantsfluidsDkm'), 'is-valid': maintenancecostsform.get('lubricantsfluidsDkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('lubricantsfluidsDkm') || false">
+                {{ errorMessage('lubricantsfluidsDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('lubricantsfluids')" formControlName="lubricantsfluidsQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('lubricantsfluidsQ'), 'is-valid': maintenancecostsform.get('lubricantsfluidsQ').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('lubricantsfluidsQ') || false">
+                {{ errorMessage('lubricantsfluidsQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="lubricantsfluidsCkm" readonly=""
+                readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('lubricantsfluidsCkm'), 'is-valid': maintenancecostsform.get('lubricantsfluidsCkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('lubricantsfluidsCkm') || false">
+                {{ errorMessage('lubricantsfluidsCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">LIMPIEZA</th>
+            <td>
+              <input (change)="onData('cleaning')" formControlName="cleaningCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('cleaningCu'), 'is-valid': maintenancecostsform.get('cleaningCu').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('cleaningCu') || false">
+                {{ errorMessage('cleaningCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('cleaning')" formControlName="cleaningDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('cleaningDkm'), 'is-valid': maintenancecostsform.get('cleaningDkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('cleaningDkm') || false">
+                {{ errorMessage('cleaningDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('cleaning')" formControlName="cleaningQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('cleaningQ'), 'is-valid': maintenancecostsform.get('cleaningQ').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('cleaningQ') || false">
+                {{ errorMessage('cleaningQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="cleaningCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                readonly=""
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('cleaningCkm'), 'is-valid': maintenancecostsform.get('cleaningCkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('cleaningCkm') || false">
+                {{ errorMessage('cleaningCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="5" class="table-primary text-center">SISTEMA ELÉCTRICO</th>
+          </tr>
+          <tr>
+            <th scope="row">A/C</th>
+            <td>
+              <input (change)="onData('ac')" formControlName="acCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('acCu'), 'is-valid': maintenancecostsform.get('acCu').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('acCu') || false">
+                {{ errorMessage('acCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('ac')" formControlName="acDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('acDkm'), 'is-valid': maintenancecostsform.get('acDkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('acDkm') || false">
+                {{ errorMessage('acDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('ac')" formControlName="acQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('acQ'), 'is-valid': maintenancecostsform.get('acQ').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('acQ') || false">
+                {{ errorMessage('acQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="acCkm" readonly=""
+                readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('acCkm'), 'is-valid': maintenancecostsform.get('acCkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('acCkm') || false">
+                {{ errorMessage('acCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">MANÓMETROS </th>
+            <td>
+              <input (change)="onData('pressuregauges')" formControlName="pressuregaugesCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('pressuregaugesCu'), 'is-valid': maintenancecostsform.get('pressuregaugesCu').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('pressuregaugesCu') || false">
+                {{ errorMessage('pressuregaugesCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('pressuregauges')" formControlName="pressuregaugesDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('pressuregaugesDkm'), 'is-valid': maintenancecostsform.get('pressuregaugesDkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('pressuregaugesDkm') || false">
+                {{ errorMessage('pressuregaugesDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('pressuregauges')" formControlName="pressuregaugesQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('pressuregaugesQ'), 'is-valid': maintenancecostsform.get('pressuregaugesQ').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('pressuregaugesQ') || false">
+                {{ errorMessage('pressuregaugesQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="pressuregaugesCkm" readonly=""
+                readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('pressuregaugesCkm'), 'is-valid': maintenancecostsform.get('pressuregaugesCkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('pressuregaugesCkm') || false">
+                {{ errorMessage('pressuregaugesCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">VIDRIOS Y SISTEMA DE LIMPIEZA</th>
+            <td>
+              <input (change)="onData('glassesandcleaningsystem')" formControlName="glassesandcleaningsystemCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('glassesandcleaningsystemCu'), 'is-valid': maintenancecostsform.get('glassesandcleaningsystemCu').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('glassesandcleaningsystemCu') || false">
+                {{ errorMessage('glassesandcleaningsystemCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('glassesandcleaningsystem')" formControlName="glassesandcleaningsystemDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('glassesandcleaningsystemDkm'), 'is-valid': maintenancecostsform.get('glassesandcleaningsystemDkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('glassesandcleaningsystemDkm') || false">
+                {{ errorMessage('glassesandcleaningsystemDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('glassesandcleaningsystem')" formControlName="glassesandcleaningsystemQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('glassesandcleaningsystemQ'), 'is-valid': maintenancecostsform.get('glassesandcleaningsystemQ').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('glassesandcleaningsystemQ') || false">
+                {{ errorMessage('glassesandcleaningsystemQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="glassesandcleaningsystemCkm" readonly=""
+                readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('glassesandcleaningsystemCkm'), 'is-valid': maintenancecostsform.get('glassesandcleaningsystemCkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('glassesandcleaningsystemCkm') || false">
+                {{ errorMessage('glassesandcleaningsystemCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">LUCES</th>
+            <td>
+              <input (change)="onData('lights')" formControlName="lightsCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('lightsCu'), 'is-valid': maintenancecostsform.get('lightsCu').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('lightsCu') || false">
+                {{ errorMessage('lightsCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('lights')" formControlName="lightsDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('lightsDkm'), 'is-valid': maintenancecostsform.get('lightsDkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('lightsDkm') || false">
+                {{ errorMessage('lightsDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('lights')" formControlName="lightsQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('lightsQ'), 'is-valid': maintenancecostsform.get('lightsQ').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('lightsQ') || false">
+                {{ errorMessage('lightsQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="lightsCkm" readonly=""
+                readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('lightsCkm'), 'is-valid': maintenancecostsform.get('lightsCkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('lightsCkm') || false">
+                {{ errorMessage('lightsCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">ACCESORIOS</th>
+            <td>
+              <input (change)="onData('accessories')" formControlName="accessoriesCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('accessoriesCu'), 'is-valid': maintenancecostsform.get('accessoriesCu').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('accessoriesCu') || false">
+                {{ errorMessage('accessoriesCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('accessories')" formControlName="accessoriesDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('accessoriesDkm'), 'is-valid': maintenancecostsform.get('accessoriesDkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('accessoriesDkm') || false">
+                {{ errorMessage('accessoriesDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('accessories')" formControlName="accessoriesQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('accessoriesQ'), 'is-valid': maintenancecostsform.get('accessoriesQ').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('accessoriesQ') || false">
+                {{ errorMessage('accessoriesQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="accessoriesCkm" readonly=""
+                readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('accessoriesCkm'), 'is-valid': maintenancecostsform.get('accessoriesCkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('accessoriesCkm') || false">
+                {{ errorMessage('accessoriesCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">MOTOR DE ARRANQUE</th>
+            <td>
+              <input (change)="onData('startingmotor')" formControlName="startingmotorCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('startingmotorCu'), 'is-valid': maintenancecostsform.get('startingmotorCu').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('startingmotorCu') || false">
+                {{ errorMessage('startingmotorCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('startingmotor')" formControlName="startingmotorDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('startingmotorDkm'), 'is-valid': maintenancecostsform.get('startingmotorDkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('startingmotorDkm') || false">
+                {{ errorMessage('startingmotorDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('startingmotor')" formControlName="startingmotorQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('startingmotorQ'), 'is-valid': maintenancecostsform.get('startingmotorQ').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('startingmotorQ') || false">
+                {{ errorMessage('startingmotorQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="startingmotorCkm" readonly=""
+                readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('startingmotorCkm'), 'is-valid': maintenancecostsform.get('startingmotorCkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('startingmotorCkm') || false">
+                {{ errorMessage('startingmotorCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">ALTERNADOR</th>
+            <td>
+              <input (change)="onData('alternatorCu')" formControlName="alternatorCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('alternatorCu'), 'is-valid': maintenancecostsform.get('alternatorCu').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('alternatorCu') || false">
+                {{ errorMessage('alternatorCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('alternatorCu')" formControlName="alternatorDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('alternatorDkm'), 'is-valid': maintenancecostsform.get('alternatorDkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('alternatorDkm') || false">
+                {{ errorMessage('alternatorDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('alternatorCu')" formControlName="alternatorQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('alternatorQ'), 'is-valid': maintenancecostsform.get('alternatorQ').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('alternatorQ') || false">
+                {{ errorMessage('alternatorQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="alternatorCkm" readonly=""
+                readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('alternatorCkm'), 'is-valid': maintenancecostsform.get('alternatorCkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('alternatorCkm') || false">
+                {{ errorMessage('alternatorCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">BATERIAS</th>
+            <td>
+              <input (change)="onData('batteries')" formControlName="batteriesCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('batteriesCu'), 'is-valid': maintenancecostsform.get('batteriesCu').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('batteriesCu') || false">
+                {{ errorMessage('batteriesCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('batteries')" formControlName="batteriesDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('batteriesDkm'), 'is-valid': maintenancecostsform.get('batteriesDkm').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('batteriesDkm') || false">
+                {{ errorMessage('batteriesDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('batteries')" formControlName="batteriesQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('batteriesQ'), 'is-valid': maintenancecostsform.get('batteriesQ').valid }">
+              <small class="form-text text-danger"
+                *ngIf="isvalid('batteriesQ') || false">
+                {{ errorMessage('batteriesQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="batteriesCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('batteriesCkm'), 'is-valid': maintenancecostsform.get('batteriesCkm').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('batteriesCkm') || false">
+                {{ errorMessage('batteriesCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="5" class="table-primary text-center">SISTEMA DE FRENOS</th>
+          </tr>
+          <tr>
+            <th scope="row">REPARACIÓN MENOR (ENGRASADA LIMPIEZA)</th>
+            <td>
+              <input (change)="onData('minorrepair')" formControlName="minorrepairCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('minorrepairCu'), 'is-valid': maintenancecostsform.get('minorrepairCu').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('minorrepairCu') || false">
+                {{ errorMessage('minorrepairCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('minorrepair')" formControlName="minorrepairDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('minorrepairDkm'), 'is-valid': maintenancecostsform.get('minorrepairDkm').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('minorrepairDkm') || false">
+                {{ errorMessage('minorrepairDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('minorrepair')" formControlName="minorrepairQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('minorrepairQ'), 'is-valid': maintenancecostsform.get('minorrepairQ').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('minorrepairQ') || false">
+                {{ errorMessage('minorrepairQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="minorrepairCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('minorrepairCkm'), 'is-valid': maintenancecostsform.get('minorrepairCkm').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('minorrepairCkm') || false">
+                {{ errorMessage('minorrepairCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">REPARACIÓN MAYOR (REMACHADA Y ZAPATAS)</th>
+            <td>
+              <input (change)="onData('majorrepair')" formControlName="majorrepairCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('majorrepairCu'), 'is-valid': maintenancecostsform.get('majorrepairCu').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('majorrepairCu') || false">
+                {{ errorMessage('majorrepairCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('majorrepair')" formControlName="majorrepairDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('majorrepairDkm'), 'is-valid': maintenancecostsform.get('majorrepairDkm').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('majorrepairDkm') || false">
+                {{ errorMessage('majorrepairDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('majorrepair')" formControlName="majorrepairQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('majorrepairQ'), 'is-valid': maintenancecostsform.get('majorrepairQ').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('majorrepairQ') || false">
+                {{ errorMessage('majorrepairQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="majorrepairCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('majorrepairCkm'), 'is-valid': maintenancecostsform.get('majorrepairCkm').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('majorrepairCkm') || false">
+                {{ errorMessage('majorrepairCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">AJUSTES, CALIBRACIONES</th>
+            <td>
+              <input (change)="onData('adjustmentscalibrations')" formControlName="adjustmentscalibrationsCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('adjustmentscalibrationsCu'), 'is-valid': maintenancecostsform.get('adjustmentscalibrationsCu').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('adjustmentscalibrationsCu') || false">
+                {{ errorMessage('adjustmentscalibrationsCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('adjustmentscalibrations')" formControlName="adjustmentscalibrationsDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('adjustmentscalibrationsDkm'), 'is-valid': maintenancecostsform.get('adjustmentscalibrationsDkm').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('adjustmentscalibrationsDkm') || false">
+                {{ errorMessage('adjustmentscalibrationsDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('adjustmentscalibrations')" formControlName="adjustmentscalibrationsQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('adjustmentscalibrationsQ'), 'is-valid': maintenancecostsform.get('adjustmentscalibrationsQ').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('adjustmentscalibrationsQ') || false">
+                {{ errorMessage('adjustmentscalibrationsQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="adjustmentscalibrationsCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('adjustmentscalibrationsCkm'), 'is-valid': maintenancecostsform.get('adjustmentscalibrationsCkm').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('adjustmentscalibrationsCkm') || false">
+                {{ errorMessage('adjustmentscalibrationsCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">TAMBORES</th>
+            <td>
+              <input (change)="onData('drums')" formControlName="drumsCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('drumsCu'), 'is-valid': maintenancecostsform.get('drumsCu').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('drumsCu') || false">
+                {{ errorMessage('drumsCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('drums')" formControlName="drumsDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('drumsDkm'), 'is-valid': maintenancecostsform.get('drumsDkm').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('drumsDkm') || false">
+                {{ errorMessage('drumsDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('drums')" formControlName="drumsQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('drumsQ'), 'is-valid': maintenancecostsform.get('drumsQ').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('drumsQ') || false">
+                {{ errorMessage('drumsQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="drumsCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('drumsCkm'), 'is-valid': maintenancecostsform.get('drumsCkm').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('drumsCkm') || false">
+                {{ errorMessage('drumsCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">SELLOS (RETENEDORES)</th>
+            <td>
+              <input (change)="onData('seals')" formControlName="sealsCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('sealsCu'), 'is-valid': maintenancecostsform.get('sealsCu').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('sealsCu') || false">
+                {{ errorMessage('sealsCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('seals')" formControlName="sealsDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('sealsDkm'), 'is-valid': maintenancecostsform.get('sealsDkm').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('sealsDkm') || false">
+                {{ errorMessage('sealsDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('seals')" formControlName="sealsQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('sealsQ'), 'is-valid': maintenancecostsform.get('sealsQ').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('sealsQ') || false">
+                {{ errorMessage('sealsQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="sealsCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('sealsCkm'), 'is-valid': maintenancecostsform.get('sealsCkm').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('sealsCkm') || false">
+                {{ errorMessage('sealsCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="5" class="table-primary text-center">SUSPENSIÓN</th>
+          </tr>
+          <tr>
+            <th scope="row">RESORTES, BALLESTAS</th>
+            <td>
+              <input (change)="onData('springsleafsprings')" formControlName="springsleafspringsCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('springsleafspringsCu'), 'is-valid': maintenancecostsform.get('springsleafspringsCu').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('springsleafspringsCu') || false">
+                {{ errorMessage('springsleafspringsCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('springsleafsprings')" formControlName="springsleafspringsDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('springsleafspringsDkm'), 'is-valid': maintenancecostsform.get('springsleafspringsDkm').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('springsleafspringsDkm') || false">
+                {{ errorMessage('springsleafspringsDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('springsleafsprings')" formControlName="springsleafspringsQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('springsleafspringsQ'), 'is-valid': maintenancecostsform.get('springsleafspringsQ').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('springsleafspringsQ') || false">
+                {{ errorMessage('springsleafspringsQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="springsleafspringsCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('springsleafspringsCkm'), 'is-valid': maintenancecostsform.get('springsleafspringsCkm').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('springsleafspringsCkm') || false">
+                {{ errorMessage('springsleafspringsCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">CAUCHOS</th>
+            <td>
+              <input (change)="onData('rubber')" formControlName="rubberCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('rubberCu'), 'is-valid': maintenancecostsform.get('rubberCu').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('rubberCu') || false">
+                {{ errorMessage('rubberCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('rubber')" formControlName="rubberDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('rubberDkm'), 'is-valid': maintenancecostsform.get('rubberDkm').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('rubberDkm') || false">
+                {{ errorMessage('rubberDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('rubber')" formControlName="rubberQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('rubberQ'), 'is-valid': maintenancecostsform.get('rubberQ').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('rubberQ') || false">
+                {{ errorMessage('rubberQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="rubberCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('rubberCkm'), 'is-valid': maintenancecostsform.get('rubberCkm').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('rubberCkm') || false">
+                {{ errorMessage('rubberCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="5" class="table-primary text-center">SISTEMA DE TRANSMISIÓN</th>
+          </tr>
+          <tr>
+            <th scope="row">DIRECCIÓN</th>
+            <td>
+              <input (change)="onData('address')"  formControlName="addressCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('addressCu'), 'is-valid': maintenancecostsform.get('addressCu').valid }">
+              <small class="form-text text-danger" *ngIf="isvalid('addressCu') || false">
+                {{ errorMessage('addressCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('address')"  formControlName="addressDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('addressDkm'), 'is-valid': maintenancecostsform.get('addressDkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('addressDkm') || false">
+                {{ errorMessage('addressDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('address')"  formControlName="addressQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('addressQ'), 'is-valid': maintenancecostsform.get('addressQ').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('addressQ') || false">
+                {{ errorMessage('addressQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="addressCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('addressCkm'), 'is-valid': maintenancecostsform.get('addressCkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('addressCkm') || false">
+                {{ errorMessage('addressCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">PIN</th>
+            <td>
+              <input (change)="onData('pin')" formControlName="pinCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('pinCu'), 'is-valid': maintenancecostsform.get('pinCu').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('pinCu') || false">
+                {{ errorMessage('pinCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('pin')" formControlName="pinDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('pinDkm'), 'is-valid': maintenancecostsform.get('pinDkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('pinDkm') || false">
+                {{ errorMessage('pinDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('pin')" formControlName="pinQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('pinQ'), 'is-valid': maintenancecostsform.get('pinQ').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('pinQ') || false">
+                {{ errorMessage('pinQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="pinCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('pinCkm'), 'is-valid': maintenancecostsform.get('pinCkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('pinCkm') || false">
+                {{ errorMessage('pinCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">CLUTCH EMBRAGUE</th>
+            <td>
+              <input (change)="onData('clutchclutch')" formControlName="clutchclutchCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('clutchclutchCu'), 'is-valid': maintenancecostsform.get('clutchclutchCu').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('clutchclutchCu') || false">
+                {{ errorMessage('clutchclutchCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('clutchclutch')" formControlName="clutchclutchDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('clutchclutchDkm'), 'is-valid': maintenancecostsform.get('clutchclutchDkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('clutchclutchDkm') || false">
+                {{ errorMessage('clutchclutchDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('clutchclutch')" formControlName="clutchclutchQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('clutchclutchQ'), 'is-valid': maintenancecostsform.get('clutchclutchQ').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('clutchclutchQ') || false">
+                {{ errorMessage('clutchclutchQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="clutchclutchCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('clutchclutchCkm'), 'is-valid': maintenancecostsform.get('clutchclutchCkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('clutchclutchCkm') || false">
+                {{ errorMessage('clutchclutchCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">DIFERENCIAL TRANSMISIÓN</th>
+            <td>
+              <input (change)="onData('transmissiondifferential')" formControlName="transmissiondifferentialCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('transmissiondifferentialCu'), 'is-valid': maintenancecostsform.get('transmissiondifferentialCu').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('transmissiondifferentialCu') || false">
+                {{ errorMessage('transmissiondifferentialCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('transmissiondifferential')" formControlName="transmissiondifferentialDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('transmissiondifferentialDkm'), 'is-valid': maintenancecostsform.get('transmissiondifferentialDkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('transmissiondifferentialDkm') || false">
+                {{ errorMessage('transmissiondifferentialDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('transmissiondifferential')" formControlName="transmissiondifferentialQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('transmissiondifferentialQ'), 'is-valid': maintenancecostsform.get('transmissiondifferentialQ').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('transmissiondifferentialQ') || false">
+                {{ errorMessage('transmissiondifferentialQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="transmissiondifferentialCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('transmissiondifferentialCkm'), 'is-valid': maintenancecostsform.get('transmissiondifferentialCkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('transmissiondifferentialCkm') || false">
+                {{ errorMessage('transmissiondifferentialCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">CAJA</th>
+            <td>
+              <input (change)="onData('box')" formControlName="boxCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('boxCu'), 'is-valid': maintenancecostsform.get('boxCu').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('boxCu') || false">
+                {{ errorMessage('boxCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('box')" formControlName="boxDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('boxDkm'), 'is-valid': maintenancecostsform.get('boxDkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('boxDkm') || false">
+                {{ errorMessage('boxDkm')}}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('box')" formControlName="boxQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('boxQ'), 'is-valid': maintenancecostsform.get('boxQ').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('boxQ') || false">
+                {{ errorMessage('boxQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="boxCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('boxCkm'), 'is-valid': maintenancecostsform.get('boxCkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('boxCkm') || false">
+                {{ errorMessage('boxCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">CARDÁN </th>
+            <td>
+              <input (change)="onData('cardan')"  formControlName="cardanCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('cardanCu'), 'is-valid': maintenancecostsform.get('cardanCu').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('cardanCu') || false">
+                {{ errorMessage('cardanCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('cardan')" formControlName="cardanDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('cardanDkm'), 'is-valid': maintenancecostsform.get('cardanDkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('cardanDkm') || false">
+                {{ errorMessage('cardanDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('cardan')" formControlName="cardanQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('cardanQ'), 'is-valid': maintenancecostsform.get('cardanQ').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('cardanQ') || false">
+                {{ errorMessage('cardanQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="cardanCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('cardanCkm'), 'is-valid': maintenancecostsform.get('cardanCkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('cardanCkm') || false">
+                {{ errorMessage('cardanCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">EJE DE CARGA DELANTERO</th>
+            <td>
+              <input (change)="onData('frontloadaxle')" formControlName="frontloadaxleCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('frontloadaxleCu'), 'is-valid': maintenancecostsform.get('frontloadaxleCu').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('frontloadaxleCu') || false">
+                {{ errorMessage('frontloadaxleCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('frontloadaxle')" formControlName="frontloadaxleDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('frontloadaxleDkm'), 'is-valid': maintenancecostsform.get('frontloadaxleDkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('frontloadaxleDkm') || false">
+                {{ errorMessage('frontloadaxleDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('frontloadaxle')" formControlName="frontloadaxleQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('frontloadaxleQ'), 'is-valid': maintenancecostsform.get('frontloadaxleQ').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('frontloadaxleQ') || false">
+                {{ errorMessage('frontloadaxleQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="frontloadaxleCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('frontloadaxleCkm'), 'is-valid': maintenancecostsform.get('frontloadaxleCkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('frontloadaxleCkm') || false">
+                {{ errorMessage('frontloadaxleCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">EJE DE CARGA TRASERO</th>
+            <td>
+              <input (change)="onData('rearloadaxle')"  formControlName="rearloadaxleCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('rearloadaxleCu'), 'is-valid': maintenancecostsform.get('rearloadaxleCu').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('rearloadaxleCu') || false">
+                {{ errorMessage('rearloadaxleCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('rearloadaxle')" formControlName="rearloadaxleDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('rearloadaxleDkm'), 'is-valid': maintenancecostsform.get('rearloadaxleDkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('rearloadaxleDkm') || false">
+                {{ errorMessage('rearloadaxleDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('rearloadaxle')" formControlName="rearloadaxleQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('rearloadaxleQ'), 'is-valid': maintenancecostsform.get('rearloadaxleQ').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('rearloadaxleQ') || false">
+                {{ errorMessage('rearloadaxleQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="rearloadaxleCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('rearloadaxleCkm'), 'is-valid': maintenancecostsform.get('rearloadaxleCkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('rearloadaxleCkm') || false">
+                {{ errorMessage('rearloadaxleCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="5" class="table-primary text-center">REPARACIÓN DE MOTOR</th>
+          </tr>
+          <tr>
+            <th scope="row">BOMBA DE AGUA</th>
+            <td>
+              <input (change)="onData('waterpump')" formControlName="waterpumpCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('waterpumpCu'), 'is-valid': maintenancecostsform.get('waterpumpCu').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('waterpumpCu') || false">
+                {{ errorMessage('waterpumpCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('waterpump')" formControlName="waterpumpDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('waterpumpDkm'), 'is-valid': maintenancecostsform.get('waterpumpDkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('waterpumpDkm') || false">
+                {{ errorMessage('waterpumpDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('waterpump')" formControlName="waterpumpQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('waterpumpQ'), 'is-valid': maintenancecostsform.get('waterpumpQ').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('waterpumpQ') || false">
+                {{ errorMessage('waterpumpQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="waterpumpCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('waterpumpCkm'), 'is-valid': maintenancecostsform.get('waterpumpCkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('waterpumpCkm') || false">
+                {{ errorMessage('waterpumpCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">PURIFICADOR DE AIRE</th>
+            <td>
+              <input (change)="onData('airpurifier')" formControlName="airpurifierCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('airpurifierCu'), 'is-valid': maintenancecostsform.get('airpurifierCu').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('airpurifierCu') || false">
+                {{ errorMessage('airpurifierCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('airpurifier')" formControlName="airpurifierDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('airpurifierDkm'), 'is-valid': maintenancecostsform.get('airpurifierDkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('airpurifierDkm') || false">
+                {{ errorMessage('airpurifierDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('airpurifier')" formControlName="airpurifierQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('airpurifierQ'), 'is-valid': maintenancecostsform.get('airpurifierQ').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('airpurifierQ') || false">
+                {{ errorMessage('airpurifierQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="airpurifierCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('airpurifierCkm'), 'is-valid': maintenancecostsform.get('airpurifierCkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('airpurifierCkm') || false">
+                {{ errorMessage('airpurifierCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">RADIADOR</th>
+            <td>
+              <input (change)="onData('radiator')"  formControlName="radiatorCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('radiatorCu'), 'is-valid': maintenancecostsform.get('radiatorCu').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('radiatorCu') || false">
+                {{ errorMessage('radiatorCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('radiator')" formControlName="radiatorDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('radiatorDkm'), 'is-valid': maintenancecostsform.get('radiatorDkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('radiatorDkm') || false">
+                {{ errorMessage('radiatorDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('radiator')" formControlName="radiatorQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('radiatorQ'), 'is-valid': maintenancecostsform.get('radiatorQ').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('radiatorQ') || false">
+                {{ errorMessage('radiatorQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="radiatorCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('radiatorCkm'), 'is-valid': maintenancecostsform.get('radiatorCkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('radiatorCkm') || false">
+                {{ errorMessage('radiatorCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">ENTONACIÓN, PUESTA A PUNTO</th>
+            <td>
+              <input (change)="onData('intonationtuning')"  formControlName="intonationtuningCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('intonationtuningCu'), 'is-valid': maintenancecostsform.get('intonationtuningCu').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('intonationtuningCu') || false">
+                {{ errorMessage('intonationtuningCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('intonationtuning')" formControlName="intonationtuningDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('intonationtuningDkm'), 'is-valid': maintenancecostsform.get('intonationtuningDkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('intonationtuningDkm') || false">
+                {{ errorMessage('intonationtuningDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('intonationtuning')" formControlName="intonationtuningQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('intonationtuningQ'), 'is-valid': maintenancecostsform.get('intonationtuningQ').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('intonationtuningQ') || false">
+                {{ errorMessage('intonationtuningQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="intonationtuningCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('intonationtuningCkm'), 'is-valid': maintenancecostsform.get('intonationtuningCkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('intonationtuningCkm') || false">
+                {{ errorMessage('intonationtuningCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">OVERHAUL MOTOR</th>
+            <td>
+              <input (change)="onData('engineoverhaul')" formControlName="engineoverhaulCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('engineoverhaulCu'), 'is-valid': maintenancecostsform.get('engineoverhaulCu').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('engineoverhaulCu') || false">
+                {{ errorMessage('engineoverhaulCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('engineoverhaul')" formControlName="engineoverhaulDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('engineoverhaulDkm'), 'is-valid': maintenancecostsform.get('engineoverhaulDkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('engineoverhaulDkm') || false">
+                {{ errorMessage('engineoverhaulDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('engineoverhaul')" formControlName="engineoverhaulQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('engineoverhaulQ'), 'is-valid': maintenancecostsform.get('engineoverhaulQ').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('engineoverhaulQ') || false">
+                {{ errorMessage('engineoverhaulQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="engineoverhaulCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('engineoverhaulCkm'), 'is-valid': maintenancecostsform.get('engineoverhaulCkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('engineoverhaulCkm') || false">
+                {{ errorMessage('engineoverhaulCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">TURBO</th>
+            <td>
+              <input (change)="onData('turbo')"  formControlName="turboCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('turboCu'), 'is-valid': maintenancecostsform.get('turboCu').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('turboCu') || false">
+                {{ errorMessage('turboCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('turbo')" formControlName="turboDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('turboDkm'), 'is-valid': maintenancecostsform.get('turboDkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('turboDkm') || false">
+                {{ errorMessage('turboDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('turbo')" formControlName="turboQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('turboQ'), 'is-valid': maintenancecostsform.get('turboQ').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('turboQ') || false">
+                {{ errorMessage('turboQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="turboCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('turboCkm'), 'is-valid': maintenancecostsform.get('turboCkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('turboCkm') || false">
+                {{ errorMessage('turboCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">BOMBA COMBUSTIBLE</th>
+            <td>
+              <input (change)="onData('fuelpump')"  formControlName="fuelpumpCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('fuelpumpCu'), 'is-valid': maintenancecostsform.get('fuelpumpCu').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('fuelpumpCu') || false">
+                {{ errorMessage('fuelpumpCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('fuelpump')" formControlName="fuelpumpDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('fuelpumpDkm'), 'is-valid': maintenancecostsform.get('fuelpumpDkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('fuelpumpDkm') || false">
+                {{ errorMessage('fuelpumpDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('fuelpump')" formControlName="fuelpumpQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('fuelpumpQ'), 'is-valid': maintenancecostsform.get('fuelpumpQ').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('fuelpumpQ') || false">
+                {{ errorMessage('fuelpumpQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="fuelpumpCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('fuelpumpCkm'), 'is-valid': maintenancecostsform.get('fuelpumpCkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('fuelpumpCkm') || false">
+                {{ errorMessage('fuelpumpCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">SISTEMA DE ACEITE</th>
+            <td>
+              <input (change)="onData('oilsystem')" formControlName="oilsystemCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('oilsystemCu'), 'is-valid': maintenancecostsform.get('oilsystemCu').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('oilsystemCu') || false">
+                {{ errorMessage('oilsystemCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('oilsystem')" formControlName="oilsystemDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('oilsystemDkm'), 'is-valid': maintenancecostsform.get('oilsystemDkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('oilsystemDkm') || false">
+                {{ errorMessage('oilsystemDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('oilsystem')" formControlName="oilsystemQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('oilsystemQ'), 'is-valid': maintenancecostsform.get('oilsystemQ').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('oilsystemQ') || false">
+                {{ errorMessage('oilsystemQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="oilsystemCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('oilsystemCkm'), 'is-valid': maintenancecostsform.get('oilsystemCkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('oilsystemCkm') || false">
+                {{ errorMessage('oilsystemCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">ENFRIAMIENTO</th>
+            <td>
+              <input (change)="onData('cooling')" formControlName="coolingCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('coolingCu'), 'is-valid': maintenancecostsform.get('coolingCu').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('coolingCu') || false">
+                {{ errorMessage('coolingCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('cooling')" formControlName="coolingDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('coolingDkm'), 'is-valid': maintenancecostsform.get('coolingDkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('coolingDkm') || false">
+                {{ errorMessage('coolingDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('cooling')" formControlName="coolingQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('coolingQ'), 'is-valid': maintenancecostsform.get('coolingQ').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('coolingQ') || false">
+                {{ errorMessage('coolingQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="coolingCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('coolingCkm'), 'is-valid': maintenancecostsform.get('coolingCkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('coolingCkm') || false">
+                {{ errorMessage('coolingCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">SISTEMA DE ESCAPE</th>
+            <td>
+              <input (change)="onData('exhaustsystem')" formControlName="exhaustsystemCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('exhaustsystemCu'), 'is-valid': maintenancecostsform.get('exhaustsystemCu').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('exhaustsystemCu') || false">
+                {{ errorMessage('exhaustsystemCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('exhaustsystem')" formControlName="exhaustsystemDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('exhaustsystemDkm'), 'is-valid': maintenancecostsform.get('exhaustsystemDkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('exhaustsystemDkm') || false">
+                {{ errorMessage('exhaustsystemDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('exhaustsystem')" formControlName="exhaustsystemQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('exhaustsystemQ'), 'is-valid': maintenancecostsform.get('exhaustsystemQ').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('exhaustsystemQ') || false">
+                {{ errorMessage('exhaustsystemQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="exhaustsystemCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('exhaustsystemCkm'), 'is-valid': maintenancecostsform.get('exhaustsystemCkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('exhaustsystemCkm') || false">
+                {{ errorMessage('exhaustsystemCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">SISTEMA ELECTRÓNICO</th>
+            <td>
+              <input (change)="onData('electronicsystem')" formControlName="electronicsystemCu"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('electronicsystemCu'), 'is-valid': maintenancecostsform.get('electronicsystemCu').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('electronicsystemCu') || false">
+                {{ errorMessage('electronicsystemCu') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('electronicsystem')" formControlName="electronicsystemDkm"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('electronicsystemDkm'), 'is-valid': maintenancecostsform.get('electronicsystemDkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('electronicsystemDkm') || false">
+                {{ errorMessage('electronicsystemDkm') }}
+              </small>
+            </td>
+            <td>
+              <input (change)="onData('electronicsystem')" formControlName="electronicsystemQ"
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('electronicsystemQ'), 'is-valid': maintenancecostsform.get('electronicsystemQ').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('electronicsystemQ') || false">
+                {{ errorMessage('electronicsystemQ') }}
+              </small>
+            </td>
+            <td>
+              <input formControlName="electronicsystemCkm" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('electronicsystemCkm'), 'is-valid': maintenancecostsform.get('electronicsystemCkm').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('electronicsystemCkm') || false">
+                {{ errorMessage('electronicsystemCkm') }}
+              </small>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="4" class="table-dark">TOTAL </th>
+            <td class="table-dark">
+              <input formControlName="total" readonly=""
+                class="form-control form-control-sm text-end"
+                required
+                type="number"
+                placeholder="100"
+                [ngClass]="{'is-invalid': isvalid('total'), 'is-valid': maintenancecostsform.get('total').valid}">
+              <small class="form-text text-danger" *ngIf="isvalid('total') || false">
+                {{ errorMessage('total') }}
+              </small>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </cdk-virtual-scroll-viewport>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="btn btn-success" (click)="save()"
+    [disabled]="!maintenancecostsform.valid">Guardar</button>
+</mat-dialog-actions>

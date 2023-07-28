@@ -1,0 +1,142 @@
+<div class="container-fluid body">
+  <div class="mt-4"></div>
+  <nav aria-label="breadcrume">
+    <ol class="breadcrumb" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+      <li class="breadcrumb-item"><a [routerLink]="['/displaypanel']"><i class="fa-solid fa-house"></i></a></li>
+      <li class="breadcrumb-item"><a [routerLink]="['/displaypanel/route']">Rutas</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Destinos</li>
+    </ol>
+  </nav>
+  <div class="form-group d-flex justify-content-between">
+    <h4 class="fw-bold">Destinos</h4>
+    <button class="btn btn-lg btn-primary btn-sm" type="button" (click)="New()"><i class="fa-solid fa-plus"></i></button>
+  </div>
+  <div class="mt-1"></div>
+  <div class="card">
+    <div class="mt-2"></div>
+    <form  [formGroup]="destinationsform" style="margin-left: 5px;">
+      <div class="row">
+        <div class="col-sm-5">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label fw-bold">Localizacíon:</label>
+            <div class="col-sm-7">
+              <input type="text" [ngClass]="{'is-invalid': isvalid('destinations'), 'is-valid': destinationsform.get('destinations').valid }" placeholder="Localizacíon" class="form-control form-control-sm" formControlName="destinations" required>
+              <small class="form-text text-danger" *ngIf="isvalid('destinations') || false">
+                {{ errorMessage ('destinations')}}
+              </small>
+            </div>
+            <div class="col-sm-1">
+              <button class="btn btn-primary btn-sm" [disabled]="!ed" (click)="onOpenModalMaps()" type="button" id="button-addon2"><i class="fa-solid fa-location-dot"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-5">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label fw-bold">Provincia:</label>
+            <div class="col-sm-8">
+              <select required class="form-select form-select-sm" [ngClass]="{'is-invalid': isvalid('idprovince'), 'is-valid': destinationsform.get('idprovince').valid }" formControlName="idprovince" required>
+                <option value="">seleccione uno</option>
+                <option *ngFor="let item of province" [value]="item.idprovince" >{{ item.name }} ( {{item.country}} )</option>
+              </select>
+              <div class="text-danger" *ngIf="isvalid('idprovince') || false">
+                {{ errorMessage('idprovince') }}
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-sm-1">
+          <div class="form-check mt-1">
+            <input class="form-check-input" type="checkbox" checked="" formControlName="state">
+            <label class="form-check-label">
+              Activo
+            </label>
+          </div>
+          <input type="hidden" hidden formControlName="latitude">
+          <input type="hidden" hidden formControlName="longitude">
+        </div>
+        <div class="col-sm-1">
+          <button type="button" class="spacer btn btn-outline-success btn-sm" [disabled]="!destinationsform.valid" (click)="save()">
+            <i class="fa-solid fa-floppy-disk"></i>
+          </button>
+          <button type="button" class="spacer btn btn-outline-danger btn-sm" [disabled]="!ed" (click)="cancel()">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="mt-1"></div>
+  <div class="card">
+    <div class="mt-1"></div>
+    <div class="card-body">
+      <div class="d-flex justify-content-between">
+        <div class="mb-1 row text-black">
+        </div>
+        <div class="spacer1"></div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label fw-bold">Buscar:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control form-control-sm" (keyup)="applyFilter($event)" placeholder="Buscar">
+          </div>
+        </div>
+      </div>
+      <table mat-table [dataSource]="dataSource" class="table table-striped table-hover">
+        <ng-container matColumnDef="iddestinations">
+          <th scope="col" *matHeaderCellDef>Id</th>
+          <td scope="row" *matCellDef="let element">{{ element.iddestinations }}</td>
+        </ng-container>
+        <ng-container matColumnDef="destinations">
+          <th scope="col" *matHeaderCellDef>Nombre<th>
+          <td scope="row" *matCellDef="let element">{{ element.destinations }}</td>
+        </ng-container>
+        <ng-container matColumnDef="state">
+          <th scope="col" *matHeaderCellDef>Estado<th>
+          <td scope="row" *matCellDef="let element"><input class="form-check-input" type="checkbox" disabled [checked]="element.state"></td>
+        </ng-container>
+        <ng-container matColumnDef="province">
+          <th scope="col" *matHeaderCellDef>Provincia<th>
+          <td scope="row" *matCellDef="let element">{{ element.province }}</td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th scope="col" *matHeaderCellDef>Actiones</th>
+          <td scope="row" *matCellDef="let element">
+            <div class="">
+              <button (click)="Edit(element.iddestinations )" class="spacer btn btn-outline-warning">
+                <i class="fa-solid fa-file-pen"></i>
+              </button>
+              <button (click)="delete(element.iddestinations )" class="spacer btn btn-outline-danger">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="5">No hay datos</td>
+        </tr>
+      </table>
+      <mat-paginator #scheduledOrdersPaginator
+      [length]="length"
+      [pageSize]="5"
+      [pageSizeOptions]="pageSizeOptions"
+      aria-label="Select page">
+      </mat-paginator>
+    </div>
+  </div>
+  <h1>
+    <p *ngIf="coordinates.address">
+        Address: {{coordinates.address}}
+    </p>
+</h1>
+<h3>
+    <p *ngIf="coordinates.latitude">
+        Latitude: {{coordinates.latitude}}
+    </p>
+    <p *ngIf="coordinates.longitude">
+        Longitude: {{coordinates.longitude}}
+    </p>
+</h3>
+</div>

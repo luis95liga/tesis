@@ -3,6 +3,32 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@shared/*": [
+        "src/app/shared/*"
+      ],
+      "@admin/*": [
+        "src/app/pages/*"
+      ],
+      "@displaypanel/*": [
+        "src/app/pages/displaypanel/*"
+      ],
+      "@pages/*": [
+        "src/app/pages/*"
+      ],
+      "@auth/*": [
+        "src/app/pages/auth/*"
+      ],
+      "@env/*": [
+        "src/environments/*"
+      ],
+      "@service/*": [
+        "src/app/pages/displaypanel/services/*"
+      ],
+    },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,

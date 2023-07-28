@@ -1,0 +1,194 @@
+<div class="container-fluid">
+  <div class="mt-4"></div>
+  <ol class="breadcrumb" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+    <li class="breadcrumb-item">
+      <a [routerLink]="['/displaypanel']">
+        <i class="fa-solid fa-house"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item"><a [routerLink]="['/displaypanel/vehicle']">Vehículos</a></li>
+    <li class="breadcrumb-item active">Modelos de Vehiculo</li>
+  </ol>
+  <div class="form-group d-flex justify-content-between">
+    <h4 class="fw-bold">Modelos de Vehiculo</h4>
+    <button class="btn btn-lg btn-primary btn-sm" type="button" (click)="New()"><i class="fa-solid fa-plus"></i></button>
+  </div>
+  <div class="mt-1"></div>
+  <div class="card">
+    <div class="mt-2"></div>
+    <form [formGroup]="vehiclemodelform" class="spacer2">
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="form-group row">
+            <label class="col-sm-6 col-form-label fw-bold">Fabricante:</label>
+            <div class="col-sm-6">
+              <select required class="form-select form-select-sm" [ngClass]="{'is-invalid': isvalid('idmanufacturer'), 'is-valid': vehiclemodelform.get('idmanufacturer').valid }" formControlName="idmanufacturer">
+                <option value="">seleccione uno</option>
+                <option *ngFor="let item of manufacturer" [value]="item.idmanufacturer" >{{ item.name }} ( {{ item.model_types }} )</option>
+              </select>
+              <small class="form-text text-danger" *ngIf="isvalid('idmanufacturer') || false">
+                {{ errorMessage('idmanufacturer') }}
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label fw-bold">Modelo:</label>
+            <div class="col-sm-8">
+              <input type="text" placeholder="TP2544r" class="form-control form-control-sm" [ngClass]="{'is-invalid': isvalid('model'), 'is-valid': vehiclemodelform.get('model').valid }" formControlName="model">
+              <small class="form-text text-danger" *ngIf="isvalid('model') || false">
+                {{ errorMessage('model') }}
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label fw-bold">Año:</label>
+            <div class="col-sm-7">
+              <input type="date" placeholder="2020" class="form-control form-control-sm" [ngClass]="{'is-invalid': isvalid('year'), 'is-valid': vehiclemodelform.get('year').valid }" formControlName="year">
+              <small class="form-text text-danger" class="text-danger" *ngIf="isvalid('year') || false">
+                {{ errorMessage('year') }}
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group row">
+            <label class="col-sm-6 col-form-label fw-bold">Tipo de Vehiculo:</label>
+            <div class="col-sm-6">
+              <select class="form-select form-select-sm" [ngClass]="{'is-invalid': isvalid('idvehicle_type'), 'is-valid': vehiclemodelform.get('idvehicle_type').valid }" formControlName="idvehicle_type">
+                <option value="">seleccione uno</option>
+                <option *ngFor="let item of vehicletype" [value]="item.idvehicle_type" >{{ item.name }}</option>
+              </select>
+              <small class="form-text text-danger" *ngIf="isvalid('idvehicle_type') || false">
+                {{ errorMessage('idvehicle_type') }}
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label fw-bold">Clase:</label>
+            <div class="col-sm-8">
+              <input type="text" [ngClass]="{'is-invalid': isvalid('kind'), 'is-valid': vehiclemodelform.get('kind').valid }" placeholder="Thailer" class="form-control form-control-sm" formControlName="kind">
+              <small class="form-text text-danger" class="text-danger" *ngIf="isvalid('kind') || false">
+                {{ errorMessage('kind') }}
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group row">
+            <label class="col-sm-6 col-form-label fw-bold">Tipo Conbustible:</label>
+            <div class="col-sm-6">
+              <select [ngClass]="{'is-invalid': isvalid('idfuel'), 'is-valid': vehiclemodelform.get('idfuel').valid }" class="form-select form-select-sm" formControlName="idfuel">
+                <option value="">seleccione uno</option>
+                <option *ngFor="let item of fuel" [value]="item.idfuel" >{{ item.type_fuel }}</option>
+              </select>
+              <small class="form-text text-danger" *ngIf="isvalid('idfuel') || false">
+                {{ errorMessage('idfuel') }}
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label fw-bold">Tipo de Eje:</label>
+            <div class="col-sm-8">
+              <select [ngClass]="{'is-invalid': isvalid('idaxis'), 'is-valid': vehiclemodelform.get('idaxis').valid }" class="form-select form-select-sm" formControlName="idaxis">
+                <option value="">seleccione uno</option>
+                <option *ngFor="let item of axis" [value]="item.idaxis" >{{ item.name }}</option>
+              </select>
+              <small class="form-text text-danger" *ngIf="isvalid('idaxis') || false">
+                {{ errorMessage('idaxis') }}
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-1">
+          <button type="button" class="spacer btn btn-outline-success btn-sm" [disabled]="!vehiclemodelform.valid" (click)="save()">
+            <i class="fa-solid fa-floppy-disk"></i>
+          </button>
+          <button type="button" class="spacer btn btn-outline-danger btn-sm" [disabled]="!ed" (click)="cancel()">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="mt-1"></div>
+  <div class="card">
+    <div class="mt-1"></div>
+    <div class="card-body">
+      <div class="d-flex justify-content-between">
+        <div class="mb-1 row text-black">
+        </div>
+        <div class="spacer1"></div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label fw-bold">Buscar:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control form-control-sm" (keyup)="applyFilter($event)" placeholder="Buscar">
+          </div>
+        </div>
+      </div>
+      <table mat-table [dataSource]="dataSource" class="table table-striped table-hover">
+        <ng-container matColumnDef="idvehicle_model">
+          <th scope="col" *matHeaderCellDef>Id</th>
+          <td scope="row" *matCellDef="let element">{{ element.idvehicle_model }}</td>
+        </ng-container>
+        <ng-container matColumnDef="manufacturer">
+          <th scope="col" *matHeaderCellDef>Fabricante
+          <td scope="row" *matCellDef="let element">{{ element.manufacturer }}</td>
+        </ng-container>
+        <ng-container matColumnDef="model">
+          <th scope="col" *matHeaderCellDef>Modelo<th>
+          <td scope="row" *matCellDef="let element">{{ element.model }}</td>
+        </ng-container>
+        <ng-container matColumnDef="year">
+          <th scope="col" *matHeaderCellDef>Año<th>
+          <td scope="row" *matCellDef="let element">{{ element.year }}</td>
+        </ng-container>
+        <ng-container matColumnDef="vehicle_type">
+          <th scope="col" *matHeaderCellDef>Tipo<th>
+          <td scope="row" *matCellDef="let element">{{ element.vehicle_type }}</td>
+        </ng-container>
+        <ng-container matColumnDef="kind">
+          <th scope="col" *matHeaderCellDef>Clase<th>
+          <td scope="row" *matCellDef="let element">{{ element.kind }}</td>
+        </ng-container>
+        <ng-container matColumnDef="fuel">
+          <th scope="col" *matHeaderCellDef>Conbustible<th>
+          <td scope="row" *matCellDef="let element">{{ element.fuel }}</td>
+        </ng-container>
+        <ng-container matColumnDef="axis">
+          <th scope="col" *matHeaderCellDef>Eje<th>
+          <td scope="row" *matCellDef="let element">{{ element.axis }}</td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th scope="col" *matHeaderCellDef>Actiones</th>
+          <td scope="row" *matCellDef="let element">
+            <div class="">
+              <button (click)="edit(element)" class="spacer btn btn-outline-warning">
+                <i class="fa-solid fa-file-pen"></i>
+              </button>
+              <button (click)="delete(element.idvehicle_model)" class="spacer btn btn-outline-danger">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <mat-paginator #scheduledOrdersPaginator
+      [length]="length"
+      [pageSize]="5"
+      [pageSizeOptions]="pageSizeOptions"
+      aria-label="Select page">
+      </mat-paginator>
+    </div>
+  </div>

@@ -1,0 +1,37 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.spacer1 {
+  margin-left: 10px;
+}
+
+.img {
+  height: 13%;
+  width: 13%;
+}
+
+.boton {
+  display: inline;
+  padding-top: 0.4%;
+  padding-bottom: 0.4%;
+  padding-left: 0.9%;
+  padding-right: 0.9%;
+  background: rgb(221, 221, 221);
+  color: rgb(44, 62, 80);
+  border-radius: 100%;
+}
+
+.boton:hover {
+  background: whitesmoke;
+  color: rgb(128, 139, 150);
+}
+
+.boton:active {
+  background: rgb(86, 101, 115);
+  color: rgb(208, 236, 231);
+}
+
+.lb {
+  margin-left: 10px;
+}
